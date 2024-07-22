@@ -6,14 +6,14 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.preprocessing import LabelEncoder
 
 from batting_data import BattingDataUtil 
-from config import GAME_FORMAT
+from config import GAME_FORMAT, PREDICTION_FORMAT
 
 class LogisticRegressionClassifier: 
     def __init__(self): 
         self.batting_util = BattingDataUtil()
         self.x_train = self.batting_util.get_training_data() 
         self.x_test = self.batting_util.get_testing_data()
-        self.all_features = self.batting_util.selected_features  
+        self.all_features = self.batting_util.get_all_features()  
 
         self.scaler = StandardScaler() 
         self.model = None
@@ -65,7 +65,7 @@ class LogisticRegressionClassifier:
 
 
 if __name__ == "__main__": 
-    print(f'GAME FORMAT: {GAME_FORMAT}')
+    print(f'GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}')
     classifier = LogisticRegressionClassifier()
     accuracy = classifier.compute_accuracy(classifier.make_predictions())  
     print(f'logistic regression all features used')

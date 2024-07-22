@@ -1,7 +1,8 @@
 import pandas as pd 
 import numpy as np  
 from sklearn.preprocessing import LabelEncoder 
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler 
+import copy
 
 
 from config import DATA_FILES, GAME_FORMAT, PREDICTION_FORMAT
@@ -156,6 +157,9 @@ class BattingDataUtil:
         
         self.initialize()
     
+    def get_all_features(self): 
+        return copy.deepcopy(self.selected_features)
+
     def get_training_data(self): 
         return self.training_df 
     
