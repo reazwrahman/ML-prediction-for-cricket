@@ -1,6 +1,6 @@
 GAME_FORMAT = "T20" ## ODI/T20 
 
-PREDICTION_FORMAT = "BINARY" # BINARY/CUSTOM
+PREDICTION_FORMAT = "CUSTOM" # BINARY/CUSTOM
 
 # source data: https://data.world/cclayford/cricinfo-statsguru-data 
 DATA_FILES = { 

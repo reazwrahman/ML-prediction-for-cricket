@@ -26,8 +26,13 @@ class LogisticRegressionClassifier:
         model.fit(training_data, self.x_train["bucket"])   
         return model 
     
-    def make_predictions(self): 
-        model = self.build_model(self.x_train[self.all_features])
+    def make_predictions(self):  
+        if not self.model:
+            model = self.build_model(self.x_train[self.all_features]) 
+            self.model = model 
+        else: 
+            model = self.model
+            
         predictions = model.predict(self.x_test[self.all_features]) 
         return predictions 
 
@@ -47,8 +52,16 @@ class LogisticRegressionClassifier:
             print(accuracy) 
             print('\n')
         
-    def make_single_prediction(self, features): 
-        pass #TODO
+    def make_single_prediction(self, features_data:list): 
+        if not self.model:
+            model = self.build_model(self.x_train[self.all_features]) 
+            self.model = model 
+        else: 
+            model = self.model  
+        
+        prediction = model.predict([features_data]) 
+        return prediction
+        
 
 
 if __name__ == "__main__": 

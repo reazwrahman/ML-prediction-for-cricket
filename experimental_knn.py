@@ -10,7 +10,8 @@ Created on Sun Jul 21 20:57:31 2024
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score  
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 
+from sklearn.preprocessing import StandardScaler
 
 from batting_data import BattingDataUtil  
 
@@ -32,10 +33,13 @@ x_train_labels = x_train['bucket']
 x_test_features = x_test[features]
 x_test_labels = x_test['bucket'] 
 
-
+scaler = StandardScaler()
+scaler.fit_transform(x_train[features]) 
+scaler.fit_transform(x_test[features])
 
 ##### Define the range of k values to test
-k_values = [13, 15, 16, 18, 20, 22, 25, 30, 32, 34, 36, 38, 42, 45, 48, 50]
+k_values = [13, 15, 16, 18, 20, 22, 25, 30, 32, 34, 36, 38, 42, 45, 48, 50, 55, 60] 
+
 
 ##### Store accuracy results
 accuracy_results = []
