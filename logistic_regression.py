@@ -5,17 +5,21 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.preprocessing import LabelEncoder
 
-from batting_data import BattingDataUtil 
-from config import GAME_FORMAT, PREDICTION_FORMAT 
+from batting_data import BattingDataUtil  
+from bowling_data import BowlingDataUtil
+from config import GAME_FORMAT, PREDICTION_FORMAT, FEATURES, PLAYER_ROLE 
 from util import Util
 
 class LogisticRegressionClassifier: 
     def __init__(self):  
         self.general_util = Util()
-        self.batting_util = BattingDataUtil()
-        self.x_train = self.batting_util.get_training_data() 
-        self.x_test = self.batting_util.get_testing_data()
-        self.all_features = self.batting_util.get_all_features()  
+        if PLAYER_ROLE == "BOWLER":
+            self.data_util = BowlingDataUtil() 
+        else: 
+            self.data_util = BattingDataUtil()
+        self.x_train = self.data_util.get_training_data() 
+        self.x_test = self.data_util.get_testing_data()
+        self.all_features = FEATURES  
 
         self.scaler = StandardScaler() 
         self.model = None
@@ -73,7 +77,7 @@ class LogisticRegressionClassifier:
 
 
 if __name__ == "__main__": 
-    print(f'GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}') 
+    print(f'GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}, PLAYER ROLE: {PLAYER_ROLE}')
     if PREDICTION_FORMAT == "BINARY":   
         classifier = LogisticRegressionClassifier() 
         predictions = classifier.make_predictions()

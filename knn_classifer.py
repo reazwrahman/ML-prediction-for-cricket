@@ -6,16 +6,20 @@ from sklearn.preprocessing import StandardScaler
 import copy
 
 from batting_data import BattingDataUtil 
-from config import GAME_FORMAT, PREDICTION_FORMAT 
+from bowling_data import BowlingDataUtil
+from config import GAME_FORMAT, PREDICTION_FORMAT, FEATURES, PLAYER_ROLE 
 from util import Util
 
 class KNNClassifier: 
     def __init__(self):  
-        self.general_util = Util()
-        self.batting_util = BattingDataUtil()
-        self.x_train = self.batting_util.get_training_data() 
-        self.x_test = self.batting_util.get_testing_data()
-        self.all_features = self.batting_util.get_all_features()  
+        self.general_util = Util() 
+        if PLAYER_ROLE == "BOWLER":
+            self.data_util = BowlingDataUtil() 
+        else: 
+            self.data_util = BattingDataUtil()
+        self.x_train = self.data_util.get_training_data() 
+        self.x_test = self.data_util.get_testing_data()
+        self.all_features = FEATURES
 
         self.scaler = StandardScaler() 
         self.model = None 
@@ -96,7 +100,7 @@ class KNNClassifier:
 
 
 if __name__ == "__main__": 
-    print(f'GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}')
+    print(f'GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}, PLAYER ROLE: {PLAYER_ROLE}')
     classifier = KNNClassifier() 
     predictions = classifier.make_predictions()
     accuracy = classifier.compute_accuracy(predictions)  

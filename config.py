@@ -1,6 +1,17 @@
 GAME_FORMAT = "T20" ## ODI/T20 
 
-PREDICTION_FORMAT = "BINARY" # BINARY/CUSTOM
+PREDICTION_FORMAT = "BINARY" # BINARY/CUSTOM 
+
+PLAYER_ROLE = "BOWLER" # BATTER/BOWLER
+
+if PLAYER_ROLE == "BOWLER":
+    FEATURES = ['opposition', 'ground', 'country',
+            'career_wickets_per_game', 'recent_wickets_per_game', 'career_strike_rate', 
+            'recent_strike_rate']  
+    
+else: 
+    FEATURES = ['opposition','ground', 'country', 'avg_runs', 'recent_avg', 
+            'avg_sr', 'recent_avg_sr']  ## features used in classifiers
 
 # source data: https://data.world/cclayford/cricinfo-statsguru-data 
 DATA_FILES = { 
