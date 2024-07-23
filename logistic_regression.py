@@ -6,10 +6,12 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.preprocessing import LabelEncoder
 
 from batting_data import BattingDataUtil 
-from config import GAME_FORMAT, PREDICTION_FORMAT
+from config import GAME_FORMAT, PREDICTION_FORMAT 
+from util import Util
 
 class LogisticRegressionClassifier: 
-    def __init__(self): 
+    def __init__(self):  
+        self.general_util = Util()
         self.batting_util = BattingDataUtil()
         self.x_train = self.batting_util.get_training_data() 
         self.x_test = self.batting_util.get_testing_data()
@@ -60,15 +62,23 @@ class LogisticRegressionClassifier:
             model = self.model  
         
         prediction = model.predict([features_data]) 
-        return prediction
+        return prediction 
+
+    def generate_confusion_matrix(self, predictions): 
+        return self.general_util.generate_confusion_matrix(predictions, self.x_test)
+    
+    def print_confusion_matrix(self, confusion_matrix:dict): 
+        self.general_util.print_confusion_matrix(confusion_matrix) 
         
 
 
 if __name__ == "__main__": 
     print(f'GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}')
-    classifier = LogisticRegressionClassifier()
-    accuracy = classifier.compute_accuracy(classifier.make_predictions())  
+    classifier = LogisticRegressionClassifier() 
+    predictions = classifier.make_predictions()
+    accuracy = classifier.compute_accuracy(predictions)  
     print(f'logistic regression all features used')
     print(accuracy)  
     print('\n')
-    #classifier.experiment_dropping_feature()
+    #classifier.experiment_dropping_feature() 
+    classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))

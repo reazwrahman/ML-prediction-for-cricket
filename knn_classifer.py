@@ -6,10 +6,12 @@ from sklearn.preprocessing import StandardScaler
 import copy
 
 from batting_data import BattingDataUtil 
-from config import GAME_FORMAT, PREDICTION_FORMAT
+from config import GAME_FORMAT, PREDICTION_FORMAT 
+from util import Util
 
 class KNNClassifier: 
-    def __init__(self): 
+    def __init__(self):  
+        self.general_util = Util()
         self.batting_util = BattingDataUtil()
         self.x_train = self.batting_util.get_training_data() 
         self.x_test = self.batting_util.get_testing_data()
@@ -68,8 +70,13 @@ class KNNClassifier:
             accuracy_results.sort() 
             self.optimal_k =  accuracy_results[-1][1] 
             
-        return self.optimal_k  
+        return self.optimal_k 
+
+    def generate_confusion_matrix(self, predictions): 
+        return self.general_util.generate_confusion_matrix(predictions, self.x_test)
     
+    def print_confusion_matrix(self, confusion_matrix:dict): 
+        self.general_util.print_confusion_matrix(confusion_matrix) 
 
     def __plot_k_vs_accuracy(self, accuracy_results):  
         k_values = [] 
@@ -89,8 +96,10 @@ class KNNClassifier:
 
 if __name__ == "__main__": 
     print(f'GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}')
-    classifier = KNNClassifier()
-    accuracy = classifier.compute_accuracy(classifier.make_predictions())  
+    classifier = KNNClassifier() 
+    predictions = classifier.make_predictions()
+    accuracy = classifier.compute_accuracy(predictions)  
     print(f'KNN classifier all features used')
     print(accuracy)  
-    print('\n')
+    print('\n') 
+    classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))

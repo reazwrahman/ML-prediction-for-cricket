@@ -11,7 +11,7 @@ class BattingDataGenerator:
     def __init__(self, filenames): 
         self.filenames = filenames  
         self.df = None  
-        self.n = 5 ## look at recent n matches for current form 
+        self.n = 5 ## look at recent n matches for current form         
         self.initialize()
 
     def initialize(self):
@@ -136,10 +136,10 @@ class BattingDataGenerator:
             return '100+'
     
     def __use_binary_classifier(self, runs):
-        if runs >=0 and runs <=30: 
-            return 'no pick' 
+        if runs >=0 and runs <=35: 
+            return 0 
         else: 
-            return 'pick'
+            return 1
 
 
 class BattingDataUtil: 
@@ -153,7 +153,10 @@ class BattingDataUtil:
         self.testing_df = self.training_data_generator.df  
     
         self.selected_features=['opposition','ground', 'country', 'avg_runs', 'recent_avg', 
-                   'avg_sr', 'recent_avg_sr']
+                   'avg_sr', 'recent_avg_sr'] 
+        
+        self.encoding_map = dict() 
+        self.decoding_map = dict() 
         
         self.initialize()
     
@@ -173,13 +176,17 @@ class BattingDataUtil:
     
     def __encode_data(self, df): 
         ## encode features 
-        le = LabelEncoder()
-        df['opposition'] = le.fit_transform(df['opposition']) 
-        df['ground'] = le.fit_transform(df['ground'])
-        df['country'] = le.fit_transform(df['country']) 
-        df['bucket'] = le.fit_transform(df['bucket']) 
+        le = LabelEncoder() 
+        features = ["opposition", "ground", "country", "bucket"] 
+        for each in features: 
+            df[each] = le.fit_transform(df[each])  
+            self.encoding_map[each] = {label: index for index, label in enumerate(le.classes_)}
+            self.decoding_map[each] = {index: label for index, label in enumerate(le.classes_)}
         return df 
         
+
+    def get_encode_decode_map(self): 
+        return ({"encoding_map": self.encoding_map, "decoding_map": self.decoding_map})
 
 
 if __name__ == "__main__":  
@@ -190,7 +197,11 @@ if __name__ == "__main__":
 
    print ('testing data below: ') 
    print(batting_util.get_testing_data()) 
-   print ('\n')
+   print ('\n') 
+
+   #encoding_decoding_map = batting_util.get_encode_decode_map()
+   #print(encoding_decoding_map["encoding_map"]) 
+   #print(encoding_decoding_map["decoding_map"]) 
 
 
     
