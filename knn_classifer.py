@@ -39,7 +39,8 @@ class KNNClassifier:
         else: 
             model = self.model
             
-        predictions = model.predict(self.x_test[self.all_features]) 
+        predictions = model.predict(self.x_test[self.all_features])  
+        self.x_test["predictions"] = predictions
         return predictions 
 
     def make_single_prediction(self, features_data:list): 
@@ -103,3 +104,4 @@ if __name__ == "__main__":
     print(accuracy)  
     print('\n') 
     classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))
+    print(classifier.x_test["predictions"].unique())

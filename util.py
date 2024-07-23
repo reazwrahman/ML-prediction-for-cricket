@@ -42,9 +42,9 @@ class Util:
         # Calculate Accuracy
         accuracy = (statistics['TP'] + statistics['TN']) / (statistics['TP'] + statistics['TN'] + statistics['FP'] + statistics['FN']) if (statistics['TP'] + statistics['TN'] + statistics['FP'] + statistics['FN']) > 0 else 0
 
-        statistics['TPR'] = round(TPR,2)
-        statistics['TNR'] = round(TNR,2)
-        statistics['Accuracy'] = round(accuracy,2)
+        statistics['TPR'] = round(TPR*100,2)
+        statistics['TNR'] = round(TNR*100,2)
+        statistics['Accuracy'] = round(accuracy*100,2)
 
         return statistics  
     

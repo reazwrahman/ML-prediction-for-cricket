@@ -124,9 +124,9 @@ class BattingDataGenerator:
 
 
     def __use_custom_classifier(self, runs):
-        if runs >=0 and runs <=25: 
+        if runs >=0 and runs <=45: 
             return '0-25' 
-        elif runs > 25 and runs <=50: 
+        elif runs > 45 and runs <=50: 
             return '25-50' 
         elif runs > 50  and runs <=75: 
             return '50-75'  

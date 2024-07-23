@@ -73,12 +73,16 @@ class LogisticRegressionClassifier:
 
 
 if __name__ == "__main__": 
-    print(f'GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}')
-    classifier = LogisticRegressionClassifier() 
-    predictions = classifier.make_predictions()
-    accuracy = classifier.compute_accuracy(predictions)  
-    print(f'logistic regression all features used')
-    print(accuracy)  
-    print('\n')
-    #classifier.experiment_dropping_feature() 
-    classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))
+    print(f'GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}') 
+    if PREDICTION_FORMAT == "BINARY":   
+        classifier = LogisticRegressionClassifier() 
+        predictions = classifier.make_predictions()
+        accuracy = classifier.compute_accuracy(predictions)  
+        print(f'logistic regression all features used')
+        print(accuracy)  
+        print('\n')
+        #classifier.experiment_dropping_feature() 
+        classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))  
+        print(classifier.x_test["predictions"].unique())
+    else: 
+        print('Logistic Regression can only be applied for binary predictions')
