@@ -23,6 +23,9 @@ class LogisticRegressionClassifier:
 
         self.scaler = StandardScaler() 
         self.model = None
+    
+    def update_features(self, features): 
+        self.all_features = features
         
     def scale_training_data(self):
         self.scaler.fit_transform(self.x_train[self.all_features]) 
