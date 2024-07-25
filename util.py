@@ -1,4 +1,5 @@
-import pandas as pd 
+import pandas as pd  
+from imblearn.over_sampling import SMOTE
 
 
 from config import PREDICTION_FORMAT
@@ -53,4 +54,19 @@ class Util:
         statistics_df = pd.DataFrame([confusion_matrix]) 
         print(statistics_df) 
         print('\n') 
+    
+    def resample_data_with_smote(self, df, training_features):
+        feature_data = df[training_features]
+        label_data = df['bucket']
+
+        # Apply SMOTE
+        smote = SMOTE(k_neighbors = 5, random_state=42)
+        feature_resampled, label_resampled = smote.fit_resample(feature_data, label_data)
+
+        # Combine the resampled features and target into a DataFrame
+        df_resampled = pd.DataFrame(feature_resampled, columns=feature_resampled.columns)
+        df_resampled['bucket'] = label_resampled 
+
+        return df_resampled
+
 

@@ -20,7 +20,7 @@ stats_dict = {}
 counter = 1 
 for combination in all_feature_combinations:
     features = list(combination) 
-    classifier = LogisticRegressionClassifier()
+    classifier = KNNClassifier()
     classifier.update_features(features)
     predictions = classifier.make_predictions()
     stats = classifier.generate_confusion_matrix(predictions)

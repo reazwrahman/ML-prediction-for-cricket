@@ -220,18 +220,19 @@ class BowlingDataUtil:
 
 
 if __name__ == "__main__":  
-   batting_util = BowlingDataUtil()
+   bowling_util = BowlingDataUtil()
    print ('training data below: ') 
-   print(batting_util.get_training_data()) 
+   print(bowling_util.get_training_data()) 
    print ('\n') 
 
    print ('testing data below: ') 
-   print(batting_util.get_testing_data()) 
+   print(bowling_util.get_testing_data()) 
    print ('\n') 
 
-   encoding_decoding_map = batting_util.get_encode_decode_map()
+   encoding_decoding_map = bowling_util.get_encode_decode_map()
    #print(encoding_decoding_map["encoding_map"]) 
    #print(encoding_decoding_map["decoding_map"]) 
+   ## label=1, percentage in training data 27%(TN), label=0, 73% (TP) 
 
 
 

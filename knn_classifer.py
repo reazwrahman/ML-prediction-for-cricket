@@ -17,9 +17,12 @@ class KNNClassifier:
             self.data_util = BowlingDataUtil() 
         else: 
             self.data_util = BattingDataUtil()
-        self.x_train = self.data_util.get_training_data() 
-        self.x_test = self.data_util.get_testing_data()
+
         self.all_features = FEATURES
+
+        self.x_train = self.general_util.resample_data_with_smote(self.data_util.get_training_data(), self.all_features)
+        #self.x_train = self.data_util.get_training_data()
+        self.x_test = self.data_util.get_testing_data()
 
         self.scaler = StandardScaler() 
         self.model = None 
