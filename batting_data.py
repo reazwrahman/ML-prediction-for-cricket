@@ -51,9 +51,10 @@ class BattingDataGenerator:
 
         self.df['runs'] = self.df['runs'].astype(int) 
         self.df['not_out_flag'] = self.df['not_out_flag'].astype(int)  
-        self.df['strike_rate'] = self.df['strike_rate'].astype(float)  
-
-        self.df['year'] = self.df['date'].apply(lambda row: row.year) 
+        self.df['strike_rate'] = self.df['strike_rate'].astype(float)   
+        self.df['balls_faced'] = self.df['balls_faced'].astype(int)
+ 
+        self.df['year'] = self.df['date'].apply(lambda row: row.year)  
     
 
     def apply_bucket(self):  
@@ -105,21 +106,32 @@ class BattingDataGenerator:
 
 
     def calculate_average_sr(self):  
-        ## replace nan strike rate to a reasonable value 
-        self.df['strike_rate'] = self.df.apply(lambda row: row['runs']*100 if pd.isna(row['strike_rate']) else row['strike_rate'], axis=1)
-        self.df['strike_rate'] = pd.to_numeric(self.df['strike_rate'], errors='coerce')
-        average_sr = self.df.groupby('player')['strike_rate'].mean().reset_index()
-        average_sr.columns = ['player', 'avg_sr']
-        self.df = pd.merge(self.df, average_sr, on='player')  
-        self.df['avg_sr'] = round(self.df['avg_sr'],2) 
+       grouped = self.df.groupby('player').agg(
+       total_runs=pd.NamedAgg(column='runs', aggfunc='sum'),
+       balls_faced=pd.NamedAgg(column='balls_faced', aggfunc='sum')).reset_index() 
+       
+       grouped['avg_sr'] = round(grouped['total_runs'] / grouped['balls_faced'],4) * 100  
+       
+       self.df = pd.merge(self.df, grouped[['player', 'avg_sr']], on='player')  
+       self.df['avg_sr'] = pd.to_numeric(self.df['avg_sr'], errors='coerce') 
+       
 
     
     def calculate_recent_sr(self):  
+        self.df = self.df.sort_values(by=['player', 'date'], ascending=[True, False])
+
+        # Group by 'Player' and take the latest 'n' matches
         df_latest_n = self.df.groupby('player').head(self.n)
-        recent_avg_sr = df_latest_n.groupby('player')['strike_rate'].mean().reset_index() 
-        recent_avg_sr.columns = ['player','recent_avg_sr']
-        self.df = pd.merge(self.df, recent_avg_sr, on='player') 
-        self.df['recent_avg_sr'] = round(self.df['recent_avg_sr'],2)
+
+        # Group by 'Player' and calculate total runs and valid innings count
+        grouped = df_latest_n.groupby('player').agg(
+            total_runs=pd.NamedAgg(column='runs', aggfunc='sum'),
+            balls_faced=pd.NamedAgg(column='balls_faced', aggfunc='sum')).reset_index() 
+        
+        
+        grouped['recent_avg_sr'] = round(grouped['total_runs'] / grouped['balls_faced'],4)*100  
+        self.df = pd.merge(self.df, grouped[['player', 'recent_avg_sr']], on='player') 
+        self.df['recent_avg_sr'] = pd.to_numeric(self.df['recent_avg_sr'], errors='coerce') 
 
 
 
