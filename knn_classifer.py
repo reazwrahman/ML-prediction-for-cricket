@@ -13,6 +13,7 @@ from util import Util
 class KNNClassifier: 
     def __init__(self):  
         self.general_util = Util() 
+        self.name = "KNN" 
         if PLAYER_ROLE == "BOWLER":
             self.data_util = BowlingDataUtil() 
         else: 

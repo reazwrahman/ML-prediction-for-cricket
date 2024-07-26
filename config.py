@@ -2,7 +2,7 @@ GAME_FORMAT = "ODI" ## ODI/T20
 
 PREDICTION_FORMAT = "BINARY" # BINARY/CUSTOM 
 
-PLAYER_ROLE = "BOWLER" # BATTER/BOWLER
+PLAYER_ROLE = "BATTER" # BATTER/BOWLER
 
 if PLAYER_ROLE == "BOWLER":
     FEATURES = ['opposition', 'ground', 'country',
@@ -15,7 +15,7 @@ else:
 
 # source data: https://data.world/cclayford/cricinfo-statsguru-data 
 DATA_FILES = { 
-    "T20": {"training_files": [
+    "T20": {"training_files": [ 
                                 "data/t20/Men T20I Player Innings Stats - 2011 to 2020 Team Group 1.csv", 
                                 "data/t20/Men T20I Player Innings Stats - 2011 to 2020 Team Group 2.csv",  
                                 "data/t20/Men T20I Player Innings Stats - 2011 to 2020 Team Group 3.csv",  
@@ -31,7 +31,8 @@ DATA_FILES = {
                             ] 
         }, 
 
-    "ODI": {"training_files": [   
+    "ODI": {"training_files": [    
+                               "data/odi/Men ODI Player Innings Stats - 20th Century.csv",
                                "data/odi/Men ODI Player Innings Stats - 2011 to 2020 Team Group 1.csv", 
                                "data/odi/Men ODI Player Innings Stats - 2011 to 2020 Team Group 2.csv", 
                                "data/odi/Men ODI Player Innings Stats - 2011 to 2020 Team Group 3.csv", 

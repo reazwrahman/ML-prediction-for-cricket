@@ -12,6 +12,7 @@ from util import Util
 
 class LogisticRegressionClassifier: 
     def __init__(self):  
+        self.name = "LOGISTIC REGRESSION" 
         self.general_util = Util()
         if PLAYER_ROLE == "BOWLER":
             self.data_util = BowlingDataUtil() 

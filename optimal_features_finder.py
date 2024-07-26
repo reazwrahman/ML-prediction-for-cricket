@@ -1,8 +1,24 @@
-import itertools 
+import itertools  
+import argparse
 
 from knn_classifer import KNNClassifier 
 from logistic_regression import LogisticRegressionClassifier
-from config import PREDICTION_FORMAT, GAME_FORMAT, PLAYER_ROLE, FEATURES
+from config import PREDICTION_FORMAT, GAME_FORMAT, PLAYER_ROLE, FEATURES 
+
+
+parser = argparse.ArgumentParser(description="Enter a classifier type")  
+parser.add_argument('value', type=str, help='enter a classifier type, valid values: knn/log/rf/gbm')
+args = parser.parse_args()
+
+CLASSIFIER = args.value
+
+registrar = dict() 
+registrar['knn'] = KNNClassifier 
+registrar['log'] = LogisticRegressionClassifier  
+
+if CLASSIFIER not in registrar: 
+    raise Exception('Invalid Classifer Name')
+
 
 def generate_combinations(features):
     all_combinations = []
@@ -11,7 +27,8 @@ def generate_combinations(features):
         all_combinations.extend(combinations)
     return all_combinations
 
-all_feature_combinations = generate_combinations(FEATURES)
+all_feature_combinations = generate_combinations(FEATURES) 
+#all_feature_combinations = all_feature_combinations[0:2]
 
 # Initialize dictionary to store stats
 stats_dict = {}
@@ -20,7 +37,7 @@ stats_dict = {}
 counter = 1 
 for combination in all_feature_combinations:
     features = list(combination) 
-    classifier = KNNClassifier()
+    classifier = registrar[CLASSIFIER]()
     classifier.update_features(features)
     predictions = classifier.make_predictions()
     stats = classifier.generate_confusion_matrix(predictions)
@@ -38,7 +55,7 @@ for combination in all_feature_combinations:
     counter +=1
 
 # Find the best combinations  
-print ('LOGISTIC REGRESSION CLASSIFIER:')
+print (f'{registrar[CLASSIFIER]().name}')
 print(f'GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}, PLAYER ROLE: {PLAYER_ROLE}')
 best_tpr_combination = max(stats_dict, key=lambda x: stats_dict[x]['TPR'])
 best_tnr_combination = max(stats_dict, key=lambda x: stats_dict[x]['TNR'])
