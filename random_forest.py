@@ -1,6 +1,7 @@
 import copy
 import pandas as pd
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.preprocessing import LabelEncoder
@@ -17,9 +18,9 @@ from config import (
 from util import Util
 
 
-class LogisticRegressionClassifier:
+class MyRandomForestClassifier:
     def __init__(self):
-        self.name = "LOGISTIC REGRESSION"
+        self.name = "RANDOM FOREST CLASSIFIER"
         self.general_util = Util()
         if PLAYER_ROLE == "BOWLER":
             self.data_util = BowlingDataUtil()
@@ -47,8 +48,27 @@ class LogisticRegressionClassifier:
         self.scaler.fit_transform(self.x_train[self.all_features])
 
     def build_model(self, training_data):
-        model = LogisticRegression(random_state=42, max_iter=10000)
-        model.fit(training_data, self.x_train["bucket"])
+        model = RandomForestClassifier(random_state=42)
+
+        #### experimental
+        param_grid = {
+            "n_estimators": [50, 100, 200],
+            "max_depth": [None, 10, 20, 30],
+            "min_samples_split": [2, 5, 10],
+            "min_samples_leaf": [1, 2, 4],
+        }
+
+        # Use GridSearchCV to find the best parameters
+        grid_search = GridSearchCV(
+            estimator=model, param_grid=param_grid, cv=5, scoring="accuracy", n_jobs=-1
+        )
+        grid_search.fit(training_data, self.x_train["bucket"])
+
+        # Use the best estimator found by GridSearchCV
+        model = grid_search.best_estimator_
+        #### end
+
+        # model.fit(training_data, self.x_train["bucket"])
         return model
 
     def make_predictions(self):
@@ -64,18 +84,6 @@ class LogisticRegressionClassifier:
     def compute_accuracy(self, predictions):
         accuracy = accuracy_score(self.x_test["bucket"], predictions)
         return accuracy * 100
-
-    def experiment_dropping_feature(self):
-        for i in range(len(self.all_features)):
-            selected_features = copy.deepcopy(self.all_features)
-            print(f"logistic regression::dropping feature {self.all_features[i]}:")
-            del selected_features[i]
-
-            model = self.build_model(self.x_train[selected_features])
-            predictions = model.predict(self.x_test[selected_features])
-            accuracy = classifier.compute_accuracy(predictions)
-            print(accuracy)
-            print("\n")
 
     def make_single_prediction(self, features_data: list):
         if not self.model:
@@ -99,10 +107,10 @@ if __name__ == "__main__":
         f"GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}, PLAYER ROLE: {PLAYER_ROLE}"
     )
     if PREDICTION_FORMAT == "BINARY":
-        classifier = LogisticRegressionClassifier()
+        classifier = MyRandomForestClassifier()
         predictions = classifier.make_predictions()
         accuracy = classifier.compute_accuracy(predictions)
-        print(f"logistic regression all features used")
+        print(f"{classifier.name} all features used")
         print(accuracy)
         print("\n")
         # classifier.experiment_dropping_feature()

@@ -40,7 +40,20 @@ KNN classifier all features used
      TP   FP   TN    FN    TPR    TNR  Accuracy
 0  2120  442  983  1342  61.24  68.98     63.49
 =================================================
+KNN
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+Best TPR combination: ('country',) with TPR = 97.32, with TNR = 2.58, with Accuracy = 65.02
+Best TNR combination: ('opposition', 'career_wickets_per_game', 'career_strike_rate') with TNR = 88.41, with TPR = 34.69, with Accuracy = 53.01
+Best Accuracy combination: ('career_wickets_per_game',) with Accuracy = 68.57, with TPR = 88.65, with TNR = 29.77
 
+
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+KNN classifier all features used
+56.869300911854104
+
+
+     TP   FP   TN    FN    TPR    TNR  Accuracy
+0  1122  373  749  1046  51.75  66.76     56.87
 
 
 =====================================================================================
@@ -58,6 +71,20 @@ logistic regression all features used
      TP   FP    TN    FN    TPR    TNR  Accuracy
 0  2208  400  1025  1254  63.78  71.93     66.16
 ==================================================
+
+LOGISTIC REGRESSION
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+Best TPR combination: ('career_wickets_per_game', 'recent_wickets_per_game') with TPR = 56.0, with TNR = 76.11, with Accuracy = 62.86
+Best TNR combination: ('ground',) with TNR = 100.0, with TPR = 0.0, with Accuracy = 34.1
+Best Accuracy combination: ('opposition', 'career_wickets_per_game', 'recent_wickets_per_game') with Accuracy = 62.89, with TPR = 55.95, with TNR = 76.29
+
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+logistic regression all features used
+61.7629179331307
+
+
+     TP   FP   TN    FN    TPR    TNR  Accuracy
+0  1148  238  884  1020  52.95  78.79     61.76
 
 
 
