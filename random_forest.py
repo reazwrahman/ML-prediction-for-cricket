@@ -51,7 +51,7 @@ class MyRandomForestClassifier:
         model = RandomForestClassifier(random_state=42)
 
         #### experimental
-        param_grid = {
+        '''param_grid = {
             "n_estimators": [50, 100, 200],
             "max_depth": [None, 10, 20, 30],
             "min_samples_split": [2, 5, 10],
@@ -65,10 +65,10 @@ class MyRandomForestClassifier:
         grid_search.fit(training_data, self.x_train["bucket"])
 
         # Use the best estimator found by GridSearchCV
-        model = grid_search.best_estimator_
+        model = grid_search.best_estimator_'''
         #### end
 
-        # model.fit(training_data, self.x_train["bucket"])
+        model.fit(training_data, self.x_train["bucket"])
         return model
 
     def make_predictions(self):

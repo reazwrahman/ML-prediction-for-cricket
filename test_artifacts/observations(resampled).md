@@ -86,5 +86,17 @@ logistic regression all features used
      TP   FP   TN    FN    TPR    TNR  Accuracy
 0  1148  238  884  1020  52.95  78.79     61.76
 
+================================================
+RANDOM FOREST CLASSIFIER
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BATTER
+Best TPR combination: ('recent_avg',) with TPR = 65.43, with TNR = 56.01, with Accuracy = 62.81
+Best TNR combination: ('country', 'avg_runs', 'recent_avg', 'avg_sr') with TNR = 98.27, with TPR = 24.37, with Accuracy = 44.91
+Best Accuracy combination: ('recent_avg',) with Accuracy = 62.81, with TPR = 65.43, with TNR = 56.01
+
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BATTER
+RANDOM FOREST CLASSIFIER all features used
+51.41457562731181
 
 
+     TP   FP    TN    FN    TPR    TNR  Accuracy
+0  2587  224  2556  4636  35.82  91.94     51.41
