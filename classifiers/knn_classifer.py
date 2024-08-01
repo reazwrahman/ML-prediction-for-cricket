@@ -4,6 +4,14 @@ from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 import copy
+import os 
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
 
 from data.batting_data import BattingDataUtil
 from data.bowling_data import BowlingDataUtil

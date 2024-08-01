@@ -1,9 +1,16 @@
 import itertools
-import argparse
+import argparse 
+import os 
+import sys
 
-from knn_classifer import KNNClassifier
-from logistic_regression import LogisticRegressionClassifier
-from random_forest import MyRandomForestClassifier
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+from classifiers.knn_classifer import KNNClassifier
+from classifiers.logistic_regression import LogisticRegressionClassifier
+from classifiers.random_forest import MyRandomForestClassifier
 from config import PREDICTION_FORMAT, GAME_FORMAT, PLAYER_ROLE, FEATURES
 
 
