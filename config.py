@@ -2,13 +2,12 @@ GAME_FORMAT = "ODI"  ## ODI/T20
 
 PREDICTION_FORMAT = "BINARY"  ## BINARY/CUSTOM
 
-PLAYER_ROLE = "BATTER"  ## BATTER/BOWLER
+PLAYER_ROLE = "BOWLER"  ## BATTER/BOWLER
 
-USE_SYNTHETIC_DATA = False ## to address the imbalance of minority labels
+USE_SYNTHETIC_DATA = True ## to address the imbalance of minority labels
 
 if PLAYER_ROLE == "BOWLER":
     FEATURES = [
-        "date",
         "opposition",
         "ground",
         "country",

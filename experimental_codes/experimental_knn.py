@@ -13,7 +13,7 @@ from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 
-from batting_data import BattingDataUtil
+from data.batting_data import BattingDataUtil
 
 
 batting_util = BattingDataUtil()

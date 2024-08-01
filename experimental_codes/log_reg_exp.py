@@ -16,7 +16,7 @@ from sklearn.preprocessing import LabelEncoder
 
 
 # local imports
-from batting_data import BattingDataGenerator
+from data.batting_data import BattingDataGenerator
 
 training_filenames = [
     "data/t20/Men T20I Player Innings Stats - 2021.csv",

@@ -6,8 +6,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.preprocessing import LabelEncoder
 
-from batting_data import BattingDataUtil
-from bowling_data import BowlingDataUtil
+from data.batting_data import BattingDataUtil
+from data.bowling_data import BowlingDataUtil
 from config import (
     GAME_FORMAT,
     PREDICTION_FORMAT,

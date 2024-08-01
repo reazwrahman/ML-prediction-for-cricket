@@ -2,8 +2,8 @@ import pandas as pd
 import seaborn as sns 
 import matplotlib.pyplot as plt
 
-from batting_data import BattingDataUtil
-from bowling_data import BowlingDataUtil
+from data.batting_data import BattingDataUtil
+from data.bowling_data import BowlingDataUtil
 from config import (
     GAME_FORMAT,
     PREDICTION_FORMAT,

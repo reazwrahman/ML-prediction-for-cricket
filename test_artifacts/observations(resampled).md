@@ -86,7 +86,7 @@ logistic regression all features used
      TP   FP   TN    FN    TPR    TNR  Accuracy
 0  1148  238  884  1020  52.95  78.79     61.76
 
-================================================
+=========================================================================================
 RANDOM FOREST CLASSIFIER
 GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BATTER
 Best TPR combination: ('recent_avg',) with TPR = 65.43, with TNR = 56.01, with Accuracy = 62.81
@@ -100,3 +100,9 @@ RANDOM FOREST CLASSIFIER all features used
 
      TP   FP    TN    FN    TPR    TNR  Accuracy
 0  2587  224  2556  4636  35.82  91.94     51.41
+================================================= 
+RANDOM FOREST CLASSIFIER
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+Best TPR combination: ('recent_wickets_per_game',) with TPR = 87.24, with TNR = 23.15, with Accuracy = 66.43
+Best TNR combination: ('country', 'career_strike_rate', 'recent_strike_rate') with TNR = 97.8, with TPR = 10.82, with Accuracy = 39.07
+Best Accuracy combination: ('career_wickets_per_game',) with Accuracy = 67.72, with TPR = 80.2, with TNR = 41.77
