@@ -4,7 +4,7 @@ PREDICTION_FORMAT = "BINARY"  ## BINARY/CUSTOM
 
 PLAYER_ROLE = "BOWLER"  ## BATTER/BOWLER
 
-USE_SYNTHETIC_DATA = True ## to address the imbalance of minority labels
+USE_SYNTHETIC_DATA = True  ## to address the imbalance of minority labels
 
 if PLAYER_ROLE == "BOWLER":
     FEATURES = [

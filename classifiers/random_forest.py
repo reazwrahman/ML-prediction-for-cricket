@@ -4,8 +4,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix
-from sklearn.preprocessing import LabelEncoder 
-import os 
+from sklearn.preprocessing import LabelEncoder
+import os
 import sys
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -58,7 +58,7 @@ class MyRandomForestClassifier:
         model = RandomForestClassifier(random_state=42)
 
         #### experimental
-        '''param_grid = {
+        """param_grid = {
             "n_estimators": [50, 100, 200],
             "max_depth": [None, 10, 20, 30],
             "min_samples_split": [2, 5, 10],
@@ -72,7 +72,7 @@ class MyRandomForestClassifier:
         grid_search.fit(training_data, self.x_train["bucket"])
 
         # Use the best estimator found by GridSearchCV
-        model = grid_search.best_estimator_'''
+        model = grid_search.best_estimator_"""
         #### end
 
         model.fit(training_data, self.x_train["bucket"])
