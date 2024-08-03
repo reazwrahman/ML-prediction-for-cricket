@@ -24,6 +24,10 @@ from config import (
 )
 from util import Util
 
+## NOTE: initialize with values if known (for faster runtime)
+BEST_N = 200
+BEST_D = 10
+
 
 class MyRandomForestClassifier:
     def __init__(self):
@@ -48,19 +52,20 @@ class MyRandomForestClassifier:
         self.scaler = StandardScaler()
         self.model = None
 
+        self.best_n_estimators = BEST_N
+        self.best_max_depth = BEST_D
+
     def update_features(self, features):
         self.all_features = features
 
     def scale_training_data(self):
         self.scaler.fit_transform(self.x_train[self.all_features])
 
-    def build_model(self, training_data):
+    def __find_optimal_parameters(self, training_data):
         model = RandomForestClassifier(random_state=42)
-
-        #### experimental
-        """param_grid = {
-            "n_estimators": [50, 100, 200],
-            "max_depth": [None, 10, 20, 30],
+        param_grid = {
+            "n_estimators": [10, 20, 30, 50, 100, 200],
+            "max_depth": [5, 10, 20, 30],
             "min_samples_split": [2, 5, 10],
             "min_samples_leaf": [1, 2, 4],
         }
@@ -72,9 +77,22 @@ class MyRandomForestClassifier:
         grid_search.fit(training_data, self.x_train["bucket"])
 
         # Use the best estimator found by GridSearchCV
-        model = grid_search.best_estimator_"""
-        #### end
+        model = grid_search.best_estimator_
+        best_params = grid_search.best_params_
+        self.best_n_estimators = best_params["n_estimators"]
+        self.best_max_depth = best_params["max_depth"]
+        return self.best_n_estimators, self.best_max_depth
 
+    def build_model(self, training_data):
+        if not self.best_n_estimators or not self.best_max_depth:
+            self.__find_optimal_parameters(training_data)
+
+        model = RandomForestClassifier(
+            n_estimators=self.best_n_estimators,
+            max_depth=self.best_max_depth,
+            criterion="entropy",
+            random_state=42,
+        )
         model.fit(training_data, self.x_train["bucket"])
         return model
 
@@ -108,22 +126,22 @@ class MyRandomForestClassifier:
     def print_confusion_matrix(self, confusion_matrix: dict):
         self.general_util.print_confusion_matrix(confusion_matrix)
 
+    def get_optimal_parameters(self):
+        return (self.best_n_estimators, self.best_max_depth)
+
 
 if __name__ == "__main__":
     print(
         f"GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}, PLAYER ROLE: {PLAYER_ROLE}"
     )
-    if PREDICTION_FORMAT == "BINARY":
-        classifier = MyRandomForestClassifier()
-        predictions = classifier.make_predictions()
-        accuracy = classifier.compute_accuracy(predictions)
-        print(f"{classifier.name} all features used")
-        print(accuracy)
-        print("\n")
-        # classifier.experiment_dropping_feature()
-        classifier.print_confusion_matrix(
-            classifier.generate_confusion_matrix(predictions)
-        )
-        print(classifier.x_test["predictions"].unique())
-    else:
-        print("Logistic Regression can only be applied for binary predictions")
+    classifier = MyRandomForestClassifier()
+    predictions = classifier.make_predictions()
+    accuracy = classifier.compute_accuracy(predictions)
+    print(f"{classifier.name} all features used")
+    print(accuracy)
+    print("\n")
+    # classifier.experiment_dropping_feature()
+    classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))
+    print(
+        f"optimal n = {classifier.get_optimal_parameters()[0]}, optimal depth = {classifier.get_optimal_parameters()[1]}"
+    )

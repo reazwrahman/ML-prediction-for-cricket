@@ -16,7 +16,7 @@ from config import PREDICTION_FORMAT, GAME_FORMAT, PLAYER_ROLE, FEATURES
 
 parser = argparse.ArgumentParser(description="Enter a classifier type")
 parser.add_argument(
-    "value", type=str, help="enter a classifier type, valid values: knn/log/rf/gbm"
+    "value", type=str, help="enter a classifier type, valid values: knn/log/rf"
 )
 args = parser.parse_args()
 
