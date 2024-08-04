@@ -26,9 +26,9 @@ elif PLAYER_ROLE == "BATTER":
         "recent_avg",
         "avg_sr",
         "recent_avg_sr",
-    ]  ## features used in classifiers 
-else: 
-    raise Exception('PLAYER_ROLE is not recognized')
+    ]  ## features used in classifiers
+else:
+    raise Exception("PLAYER_ROLE is not recognized")
 
 # source data: https://data.world/cclayford/cricinfo-statsguru-data
 DATA_FILES = {

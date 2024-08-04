@@ -2,6 +2,8 @@ import itertools
 import argparse
 import os
 import sys
+import multiprocessing
+from functools import partial
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
@@ -13,6 +15,7 @@ from classifiers.logistic_regression import LogisticRegressionClassifier
 from classifiers.random_forest import MyRandomForestClassifier
 from config import PREDICTION_FORMAT, GAME_FORMAT, PLAYER_ROLE, FEATURES
 
+
 def generate_combinations(features):
     all_combinations = []
     for r in range(1, len(features) + 1):
@@ -21,22 +24,12 @@ def generate_combinations(features):
     return all_combinations
 
 
-all_feature_combinations = generate_combinations(FEATURES)
-#all_feature_combinations = all_feature_combinations[0:2] # for quick testing
+def process_classifier(each_classifier, all_feature_combinations, registrar):
+    stats_dict = {}
+    counter = 0
 
-registrar = dict()
-registrar["knn"] = KNNClassifier
-registrar["log"] = LogisticRegressionClassifier
-registrar["rf"] = MyRandomForestClassifier
-
-# Initialize dictionary to store stats
-stats_dict = {}
-
-# Assuming classifier is already defined and has the methods used below
-counter = 1 
-for each_classifer in registrar: 
-    for combination in all_feature_combinations: 
-        classifier = registrar[each_classifer]()
+    for combination in all_feature_combinations:
+        classifier = registrar[each_classifier]()
         features = list(combination)
         classifier.update_features(features)
         predictions = classifier.make_predictions()
@@ -47,7 +40,6 @@ for each_classifer in registrar:
         accuracy = stats["Accuracy"]
 
         stats_dict[tuple(features)] = {"TPR": tpr, "TNR": tnr, "Accuracy": accuracy}
-        #print(counter)
         counter += 1
 
     # Find the best combinations
@@ -57,8 +49,8 @@ for each_classifer in registrar:
     best_tpr_combination = max(stats_dict, key=lambda x: stats_dict[x]["TPR"])
     best_tnr_combination = max(stats_dict, key=lambda x: stats_dict[x]["TNR"])
     best_accuracy_combination = max(stats_dict, key=lambda x: stats_dict[x]["Accuracy"])
-    print('-'*80)
-    print(f'classifier: {classifier.name}')
+    print("-" * 80)
+    print(f"classifier: {each_classifier}")
     print(
         f"Best TPR combination: {best_tpr_combination} with TPR = {stats_dict[best_tpr_combination]['TPR']}, with TNR = {stats_dict[best_tpr_combination]['TNR']}, with Accuracy = {stats_dict[best_tpr_combination]['Accuracy']}"
     )
@@ -70,3 +62,22 @@ for each_classifer in registrar:
     print(
         f"Best Accuracy combination: {best_accuracy_combination} with Accuracy = {stats_dict[best_accuracy_combination]['Accuracy']}, with TPR = {stats_dict[best_accuracy_combination]['TPR']}, with TNR = {stats_dict[best_accuracy_combination]['TNR']}"
     )
+    print('\n')
+
+
+if __name__ == "__main__":
+    all_feature_combinations = generate_combinations(FEATURES)
+    all_feature_combinations = all_feature_combinations[0:2]  # for quick testing
+
+    registrar = dict()
+    registrar["knn"] = KNNClassifier
+    registrar["log"] = LogisticRegressionClassifier
+    registrar["rf"] = MyRandomForestClassifier
+
+    partial_process_classifier = partial(
+        process_classifier, all_feature_combinations, registrar
+    )
+
+    # Multiprocessing pool
+    with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
+        pool.map(partial_process_classifier, registrar.keys())

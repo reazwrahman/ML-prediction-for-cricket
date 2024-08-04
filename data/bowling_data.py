@@ -12,7 +12,7 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 import copy
-import os 
+import os
 import sys
 
 current_dir = os.path.dirname(os.path.abspath(__file__))

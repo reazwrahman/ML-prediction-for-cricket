@@ -21,8 +21,8 @@ from config import (
 from util import Util
 
 print(
-        f"GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}, PLAYER ROLE: {PLAYER_ROLE}"
-    )
+    f"GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}, PLAYER ROLE: {PLAYER_ROLE}"
+)
 
 if PLAYER_ROLE == "BOWLER":
     data_util = BowlingDataUtil()
@@ -33,7 +33,7 @@ x_train = data_util.training_df
 
 features_set = [FEATURES[0:4], FEATURES[4::]]
 
-for features in features_set: 
+for features in features_set:
     plt.figure(figsize=(16, 12))
 
     for i, feature in enumerate(features):

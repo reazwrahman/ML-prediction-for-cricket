@@ -36,9 +36,9 @@ class MyRandomForestClassifier(BaseClassifier):
         super().__init__()
 
         self.best_n_estimators = BEST_N
-        self.best_max_depth = BEST_D  
+        self.best_max_depth = BEST_D
 
-        self.feature_weights = None 
+        self.feature_weights = None
         self.feature_importance = None
 
     def update_features(self, features):
@@ -86,7 +86,7 @@ class MyRandomForestClassifier(BaseClassifier):
         else:
             model = self.model
 
-        predictions = model.predict(self.x_test[self.all_features]) 
+        predictions = model.predict(self.x_test[self.all_features])
         self.feature_weights = model.feature_importances_
         return predictions
 
@@ -111,16 +111,18 @@ class MyRandomForestClassifier(BaseClassifier):
         self.general_util.print_confusion_matrix(confusion_matrix)
 
     def get_optimal_parameters(self):
-        return (self.best_n_estimators, self.best_max_depth) 
-    
-    def get_feature_importance(self): 
-        feature_importances_df = pd.DataFrame({
-            'Feature': self.all_features,
-            'Weight': self.feature_weights
-        })
+        return (self.best_n_estimators, self.best_max_depth)
 
-        self.feature_importance = feature_importances_df.sort_values(by='Weight', ascending=False).reset_index(drop=True)
+    def get_feature_importance(self):
+        feature_importances_df = pd.DataFrame(
+            {"Feature": self.all_features, "Weight": self.feature_weights}
+        )
+
+        self.feature_importance = feature_importances_df.sort_values(
+            by="Weight", ascending=False
+        ).reset_index(drop=True)
         return self.feature_importance
+
 
 if __name__ == "__main__":
     print(
@@ -136,6 +138,6 @@ if __name__ == "__main__":
     classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))
     print(
         f"optimal n = {classifier.get_optimal_parameters()[0]}, optimal depth = {classifier.get_optimal_parameters()[1]}"
-    )  
-    print('\n')
+    )
+    print("\n")
     print(classifier.get_feature_importance())

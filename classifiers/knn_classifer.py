@@ -26,7 +26,7 @@ from util import Util
 
 
 class KNNClassifier(BaseClassifier):
-    def __init__(self): 
+    def __init__(self):
         self.name = "KNN"
         super().__init__()
         self.optimal_k = None

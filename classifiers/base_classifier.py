@@ -24,11 +24,13 @@ from config import (
 )
 from util import Util
 
-''' 
+""" 
 Base class (blueprint) for all classifers
-'''
-class BaseClassifier: 
-    def __init__(self): 
+"""
+
+
+class BaseClassifier:
+    def __init__(self):
         self.general_util = Util()
         if PLAYER_ROLE == "BOWLER":
             self.data_util = BowlingDataUtil()
@@ -49,29 +51,24 @@ class BaseClassifier:
         self.scale_training_data()
         self.model = None
 
-    def scale_training_data(self): 
+    def scale_training_data(self):
         self.scaler = StandardScaler()
-        self.scaler.fit_transform(self.x_train[self.all_features]) 
+        self.scaler.fit_transform(self.x_train[self.all_features])
 
     def update_features(self, features):
-        raise NotImplementedError   
-    
-    def build_model(self, training_data): 
-        raise NotImplementedError 
+        raise NotImplementedError
 
-    def make_predictions(self): 
-        raise NotImplementedError  
+    def build_model(self, training_data):
+        raise NotImplementedError
+
+    def make_predictions(self):
+        raise NotImplementedError
 
     def make_single_prediction(self, features_data: list):
-        raise NotImplementedError  
+        raise NotImplementedError
 
     def generate_confusion_matrix(self, predictions):
-        raise NotImplementedError  
+        raise NotImplementedError
 
     def print_confusion_matrix(self, confusion_matrix: dict):
-        raise NotImplementedError  
-    
-    
-
-
-    
+        raise NotImplementedError
