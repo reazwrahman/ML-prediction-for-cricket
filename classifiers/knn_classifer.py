@@ -24,21 +24,21 @@ from config import (
 )
 from util import Util
 
+## initialize (if known) for faster computation
+OPTIMAL_K = 16 ## set None if not known
 
 class KNNClassifier(BaseClassifier):
     def __init__(self):
         self.name = "KNN"
         super().__init__()
-        self.optimal_k = None
-
-    def update_features(self, features):
-        self.all_features = features
+        self.optimal_k = OPTIMAL_K
 
     def build_model(self, training_data, k):
         model = KNeighborsClassifier(n_neighbors=k)
         model.fit(training_data, self.x_train["bucket"])
-        return model
-
+        return model 
+    
+    ## override base method
     def make_predictions(self, k=None):
         if not k:
             k = self.find_optimal_k()
@@ -52,22 +52,6 @@ class KNNClassifier(BaseClassifier):
         predictions = model.predict(self.x_test[self.all_features])
         self.x_test["predictions"] = predictions
         return predictions
-
-    def make_single_prediction(self, features_data: list):
-        if not self.model:
-            model = self.build_model(
-                self.x_train[self.all_features], self.find_optimal_k()
-            )
-            self.model = model
-        else:
-            model = self.model
-
-        prediction = model.predict([features_data])
-        return prediction
-
-    def compute_accuracy(self, predictions):
-        accuracy = accuracy_score(self.x_test["bucket"], predictions)
-        return accuracy * 100
 
     def find_optimal_k(self):
         if not self.optimal_k:
@@ -104,11 +88,6 @@ class KNNClassifier(BaseClassifier):
 
         return self.optimal_k
 
-    def generate_confusion_matrix(self, predictions):
-        return self.general_util.generate_confusion_matrix(predictions, self.x_test)
-
-    def print_confusion_matrix(self, confusion_matrix: dict):
-        self.general_util.print_confusion_matrix(confusion_matrix)
 
     def __plot_k_vs_accuracy(self, accuracy_results):
         k_values = []
@@ -137,3 +116,4 @@ if __name__ == "__main__":
     print(accuracy)
     print("\n")
     classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))
+    print(classifier.optimal_k)

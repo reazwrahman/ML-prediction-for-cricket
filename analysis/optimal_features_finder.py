@@ -28,7 +28,7 @@ def process_classifier(classifier_key, all_feature_combinations, registrar):
     stats_dict = {}
     counter = 0
 
-    for combination in all_feature_combinations:
+    for combination in all_feature_combinations: 
         classifier = registrar[classifier_key]()
         features = list(combination)
         classifier.update_features(features)

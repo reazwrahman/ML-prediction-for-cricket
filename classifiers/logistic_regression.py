@@ -30,27 +30,10 @@ class LogisticRegressionClassifier(BaseClassifier):
         self.name = "LOGISTIC REGRESSION"
         super().__init__()
 
-    def update_features(self, features):
-        self.all_features = features
-
     def build_model(self, training_data):
         model = LogisticRegression(random_state=42, max_iter=10000)
         model.fit(training_data, self.x_train["bucket"])
         return model
-
-    def make_predictions(self):
-        if not self.model:
-            model = self.build_model(self.x_train[self.all_features])
-            self.model = model
-        else:
-            model = self.model
-
-        predictions = model.predict(self.x_test[self.all_features])
-        return predictions
-
-    def compute_accuracy(self, predictions):
-        accuracy = accuracy_score(self.x_test["bucket"], predictions)
-        return accuracy * 100
 
     def experiment_dropping_feature(self):
         for i in range(len(self.all_features)):
@@ -64,21 +47,6 @@ class LogisticRegressionClassifier(BaseClassifier):
             print(accuracy)
             print("\n")
 
-    def make_single_prediction(self, features_data: list):
-        if not self.model:
-            model = self.build_model(self.x_train[self.all_features])
-            self.model = model
-        else:
-            model = self.model
-
-        prediction = model.predict([features_data])
-        return prediction
-
-    def generate_confusion_matrix(self, predictions):
-        return self.general_util.generate_confusion_matrix(predictions, self.x_test)
-
-    def print_confusion_matrix(self, confusion_matrix: dict):
-        self.general_util.print_confusion_matrix(confusion_matrix)
 
 
 if __name__ == "__main__":

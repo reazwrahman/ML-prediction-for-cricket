@@ -56,19 +56,34 @@ class BaseClassifier:
         self.scaler.fit_transform(self.x_train[self.all_features])
 
     def update_features(self, features):
-        raise NotImplementedError
+        self.all_features = features
 
     def build_model(self, training_data):
         raise NotImplementedError
 
     def make_predictions(self):
-        raise NotImplementedError
+        if not self.model:
+            model = self.build_model(self.x_train[self.all_features])
+            self.model = model
+        else:
+            model = self.model
 
+        predictions = model.predict(self.x_test[self.all_features])
+        return predictions
+    
     def make_single_prediction(self, features_data: list):
-        raise NotImplementedError
+        # Assuming features_data is a list of values corresponding to self.selected_features
+        features_df = pd.DataFrame([features_data], columns=self.selected_features)
+        features_df = self.scaler.transform(features_df)  # Scale the data
+        prediction = self.model.predict(features_df)
+        return prediction[0] 
+    
+    def compute_accuracy(self, predictions):
+        accuracy = accuracy_score(self.x_test["bucket"], predictions)
+        return accuracy * 100
 
     def generate_confusion_matrix(self, predictions):
-        raise NotImplementedError
+        return self.general_util.generate_confusion_matrix(predictions, self.x_test)
 
     def print_confusion_matrix(self, confusion_matrix: dict):
-        raise NotImplementedError
+        self.general_util.print_confusion_matrix(confusion_matrix)

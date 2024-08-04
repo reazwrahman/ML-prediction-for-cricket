@@ -2,7 +2,7 @@ GAME_FORMAT = "ODI"  ## ODI/T20
 
 PREDICTION_FORMAT = "BINARY"  ## BINARY/CUSTOM (CUSTOM is outdated, only use BINARY)
 
-PLAYER_ROLE = "BOWLER"  ## BATTER/BOWLER
+PLAYER_ROLE = "BATTER"  ## BATTER/BOWLER
 
 USE_SYNTHETIC_DATA = True  ## True/False, to address the imbalance of minority labels
 
