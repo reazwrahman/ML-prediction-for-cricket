@@ -9,8 +9,15 @@ Best Accuracy combination: ('country', 'avg_runs', 'avg_sr', 'recent_avg_sr') wi
 --------------------------------------------------------------------------------
 classifier: KNN
 Best TPR combination: ('country',) with TPR = 100.0, with TNR = 0.0, with Accuracy = 72.21
-Best TNR combination: ('avg_runs',) with TNR = 73.56, with TPR = 56.4, with Accuracy = 61.17
+Best TNR combination: ('avg_runs', 'recent_avg') with TNR = 78.27, with TPR = 49.08, with Accuracy = 57.19
 Best Accuracy combination: ('country',) with Accuracy = 72.21, with TPR = 100.0, with TNR = 0.0
+
+
+--------------------------------------------------------------------------------
+classifier: GBM
+Best TPR combination: ('avg_runs',) with TPR = 55.23, with TNR = 79.28, with Accuracy = 61.91
+Best TNR combination: ('ground',) with TNR = 100.0, with TPR = 0.0, with Accuracy = 27.79
+Best Accuracy combination: ('avg_runs',) with Accuracy = 61.91, with TPR = 55.23, with TNR = 79.28
 
 
 --------------------------------------------------------------------------------
@@ -18,5 +25,3 @@ classifier: RANDOM FOREST
 Best TPR combination: ('opposition',) with TPR = 58.23, with TNR = 43.63, with Accuracy = 54.17
 Best TNR combination: ('country', 'avg_runs', 'avg_sr') with TNR = 89.06, with TPR = 43.75, with Accuracy = 56.34
 Best Accuracy combination: ('ground', 'avg_runs') with Accuracy = 61.34, with TPR = 53.83, with TNR = 80.86
-
-

@@ -8,9 +8,16 @@ Best Accuracy combination: ('career_wickets_per_game',) with Accuracy = 61.62, w
 
 --------------------------------------------------------------------------------
 classifier: KNN
-Best TPR combination: ('country',) with TPR = 100.0, with TNR = 0.0, with Accuracy = 67.53
-Best TNR combination: ('career_wickets_per_game', 'career_strike_rate') with TNR = 82.62, with TPR = 42.59, with Accuracy = 55.59
-Best Accuracy combination: ('career_wickets_per_game',) with Accuracy = 68.64, with TPR = 88.67, with TNR = 26.99
+Best TPR combination: ('country',) with TPR = 95.31, with TNR = 6.68, with Accuracy = 66.53
+Best TNR combination: ('career_wickets_per_game', 'recent_wickets_per_game', 'career_strike_rate') with TNR = 83.26, with TPR = 37.86, with Accuracy = 52.6
+Best Accuracy combination: ('career_wickets_per_game',) with Accuracy = 67.97, with TPR = 90.92, with TNR = 20.27
+
+
+--------------------------------------------------------------------------------
+classifier: GBM
+Best TPR combination: ('recent_wickets_per_game', 'recent_strike_rate') with TPR = 66.98, with TNR = 54.07, with Accuracy = 62.79
+Best TNR combination: ('opposition', 'country') with TNR = 87.1, with TPR = 14.28, with Accuracy = 37.92
+Best Accuracy combination: ('recent_wickets_per_game', 'recent_strike_rate') with Accuracy = 62.79, with TPR = 66.98, with TNR = 54.07
 
 
 --------------------------------------------------------------------------------

@@ -13,7 +13,8 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 from classifiers.knn_classifer import KNNClassifier
 from classifiers.logistic_regression import LogisticRegressionClassifier
 from classifiers.random_forest import MyRandomForestClassifier 
-from classifiers.gbm_classifier import GBMClassifier
+from classifiers.gbm_classifier import GBMClassifier 
+from classifiers.svm_classifier import SVMClassifier
 from config import PREDICTION_FORMAT, GAME_FORMAT, PLAYER_ROLE, FEATURES
 
 
@@ -71,10 +72,11 @@ if __name__ == "__main__":
     ##all_feature_combinations = all_feature_combinations[0:2]  # for quick testing
 
     registrar = dict()
-    registrar["KNN"] = KNNClassifier
-    registrar["LOGISTIC REGRESSION"] = LogisticRegressionClassifier
-    registrar["RANDOM FOREST"] = MyRandomForestClassifier 
-    registrar["GBM"] = GBMClassifier
+    # registrar["KNN"] = KNNClassifier
+    # registrar["LOGISTIC REGRESSION"] = LogisticRegressionClassifier
+    # registrar["RANDOM FOREST"] = MyRandomForestClassifier 
+    # registrar["GBM"] = GBMClassifier 
+    registrar["SVM"] = SVMClassifier
 
     # Multiprocessing pool
     with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
