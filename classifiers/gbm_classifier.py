@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.ensemble import GradientBoostingClassifier 
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import GridSearchCV
 import os
 import sys
@@ -19,55 +19,64 @@ from config import (
     PLAYER_ROLE,
     USE_SYNTHETIC_DATA,
 )
-from util import Util 
+from util import Util
+
+## set None if not known, otherwise set to known value for faster computation
+OPTIMAL_PARAMETERS = {
+    "learning_rate": 0.01,
+    "max_depth": 3,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "n_estimators": 50,
+}
+
 
 class GBMClassifier(BaseClassifier):
     def __init__(self):
         self.name = "GRADIENT BOOSTING"
         super().__init__() 
-    
-    def find_optimal_parameters(self, training_data): 
+        self.optimal_parameters = OPTIMAL_PARAMETERS
+
+    def __find_optimal_parameters(self, training_data):
 
         param_grid = {
-            'n_estimators': [10, 50, 100, 200],
-            'learning_rate': [0.01, 0.1, 0.2],
-            'max_depth': [3, 4, 5],
-            'min_samples_split': [2, 5, 10],
-            'min_samples_leaf': [1, 2, 4]
+            "n_estimators": [10, 50, 100, 200],
+            "learning_rate": [0.01, 0.1, 0.2],
+            "max_depth": [3, 4, 5],
+            "min_samples_split": [2, 5, 10],
+            "min_samples_leaf": [1, 2, 4],
         }
-        
+
         # Instantiate the model
         model = GradientBoostingClassifier()
-        
+
         # Use GridSearchCV to find the best parameters
-        grid_search = GridSearchCV(estimator=model, param_grid=param_grid, cv=5, n_jobs=-1, scoring='accuracy')
-        grid_search.fit(training_data[self.all_features], training_data['bucket'])
-        
+        grid_search = GridSearchCV(
+            estimator=model, param_grid=param_grid, cv=5, n_jobs=-1, scoring="accuracy"
+        )
+        grid_search.fit(training_data[self.all_features], training_data["bucket"])
+
         # Use the best model found by GridSearchCV
         model = grid_search.best_estimator_
-        best_params = grid_search.best_params_ 
-        print (best_params)
+        best_params = grid_search.best_params_
+        print(best_params)
         return best_params
 
-    def build_model(self, training_data): 
-        print('gbm build model is called')
-        model = GradientBoostingClassifier() 
+    def build_model(self, training_data):
+        model = GradientBoostingClassifier(**self.optimal_parameters)
         model.fit(training_data, self.x_train["bucket"])
         return model
 
-if __name__ == "__main__": 
+
+if __name__ == "__main__":
     print(
         f"GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}, PLAYER ROLE: {PLAYER_ROLE}"
     )
-    
+
     classifier = GBMClassifier()
     predictions = classifier.make_predictions()
     accuracy = classifier.compute_accuracy(predictions)
     print(f"GBM all features used")
     print(accuracy)
     print("\n")
-    classifier.print_confusion_matrix(
-        classifier.generate_confusion_matrix(predictions)
-    )
-    classifier.find_optimal_parameters(classifier.x_train)
-   
+    classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))

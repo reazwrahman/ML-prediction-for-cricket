@@ -70,14 +70,14 @@ class BaseClassifier:
 
         predictions = model.predict(self.x_test[self.all_features])
         return predictions
-    
+
     def make_single_prediction(self, features_data: list):
         # Assuming features_data is a list of values corresponding to self.selected_features
         features_df = pd.DataFrame([features_data], columns=self.selected_features)
         features_df = self.scaler.transform(features_df)  # Scale the data
         prediction = self.model.predict(features_df)
-        return prediction[0] 
-    
+        return prediction[0]
+
     def compute_accuracy(self, predictions):
         accuracy = accuracy_score(self.x_test["bucket"], predictions)
         return accuracy * 100

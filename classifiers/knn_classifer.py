@@ -25,7 +25,8 @@ from config import (
 from util import Util
 
 ## initialize (if known) for faster computation
-OPTIMAL_K = 16 ## set None if not known
+OPTIMAL_K = 16  ## set None if not known
+
 
 class KNNClassifier(BaseClassifier):
     def __init__(self):
@@ -36,8 +37,8 @@ class KNNClassifier(BaseClassifier):
     def build_model(self, training_data, k):
         model = KNeighborsClassifier(n_neighbors=k)
         model.fit(training_data, self.x_train["bucket"])
-        return model 
-    
+        return model
+
     ## override base method
     def make_predictions(self, k=None):
         if not k:
@@ -88,7 +89,6 @@ class KNNClassifier(BaseClassifier):
 
         return self.optimal_k
 
-
     def __plot_k_vs_accuracy(self, accuracy_results):
         k_values = []
         accuracies = []
@@ -116,4 +116,4 @@ if __name__ == "__main__":
     print(accuracy)
     print("\n")
     classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))
-    print(classifier.optimal_k)
+    print(f"optimal k = {classifier.optimal_k}")

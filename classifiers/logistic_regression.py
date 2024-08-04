@@ -48,7 +48,6 @@ class LogisticRegressionClassifier(BaseClassifier):
             print("\n")
 
 
-
 if __name__ == "__main__":
     print(
         f"GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}, PLAYER ROLE: {PLAYER_ROLE}"
