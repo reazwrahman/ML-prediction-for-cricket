@@ -12,6 +12,7 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
+from classifiers.base_classifier import BaseClassifier
 from data.batting_data import BattingDataUtil
 from data.bowling_data import BowlingDataUtil
 from config import (
@@ -24,34 +25,13 @@ from config import (
 from util import Util
 
 
-class LogisticRegressionClassifier:
+class LogisticRegressionClassifier(BaseClassifier):
     def __init__(self):
         self.name = "LOGISTIC REGRESSION"
-        self.general_util = Util()
-        if PLAYER_ROLE == "BOWLER":
-            self.data_util = BowlingDataUtil()
-        else:
-            self.data_util = BattingDataUtil()
-
-        self.all_features = FEATURES
-
-        if USE_SYNTHETIC_DATA:
-            self.x_train = self.general_util.resample_data_with_smote(
-                self.data_util.get_training_data(), self.all_features
-            )
-        else:
-            self.x_train = self.data_util.get_training_data()
-
-        self.x_test = self.data_util.get_testing_data()
-
-        self.scaler = StandardScaler()
-        self.model = None
+        super().__init__()
 
     def update_features(self, features):
         self.all_features = features
-
-    def scale_training_data(self):
-        self.scaler.fit_transform(self.x_train[self.all_features])
 
     def build_model(self, training_data):
         model = LogisticRegression(random_state=42, max_iter=10000)

@@ -66,7 +66,6 @@ class Util:
         statistics["TPR"] = round(TPR * 100, 2)
         statistics["TNR"] = round(TNR * 100, 2)
         statistics["Accuracy"] = round(accuracy * 100, 2)
-
         return statistics
 
     def print_confusion_matrix(self, confusion_matrix: dict):

@@ -12,7 +12,13 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 import copy
+import os 
+import sys
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 from config import DATA_FILES, GAME_FORMAT, PREDICTION_FORMAT
 

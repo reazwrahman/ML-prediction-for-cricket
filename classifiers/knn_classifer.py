@@ -12,7 +12,7 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-
+from classifiers.base_classifier import BaseClassifier
 from data.batting_data import BattingDataUtil
 from data.bowling_data import BowlingDataUtil
 from config import (
@@ -25,35 +25,14 @@ from config import (
 from util import Util
 
 
-class KNNClassifier:
-    def __init__(self):
-        self.general_util = Util()
+class KNNClassifier(BaseClassifier):
+    def __init__(self): 
         self.name = "KNN"
-        if PLAYER_ROLE == "BOWLER":
-            self.data_util = BowlingDataUtil()
-        else:
-            self.data_util = BattingDataUtil()
-
-        self.all_features = FEATURES
-
-        if USE_SYNTHETIC_DATA:
-            self.x_train = self.general_util.resample_data_with_smote(
-                self.data_util.get_training_data(), self.all_features
-            )
-        else:
-            self.x_train = self.data_util.get_training_data()
-
-        self.x_test = self.data_util.get_testing_data()
-
-        self.scaler = StandardScaler()
-        self.model = None
+        super().__init__()
         self.optimal_k = None
 
     def update_features(self, features):
         self.all_features = features
-
-    def scale_training_data(self):
-        self.scaler.fit_transform(self.x_train[self.all_features])
 
     def build_model(self, training_data, k):
         model = KNeighborsClassifier(n_neighbors=k)
@@ -158,4 +137,3 @@ if __name__ == "__main__":
     print(accuracy)
     print("\n")
     classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))
-    print(classifier.x_test["predictions"].unique())
