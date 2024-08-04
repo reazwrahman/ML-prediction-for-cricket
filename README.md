@@ -1,6 +1,8 @@
 # Project Scope 
 
-TODO
+This repository analyzes a number of machine learning models designed to predict whether a cricket player (batter and bowler) will exceed a specific performance threshold in upcoming matches. The project leverages uses open source historical data on players' performances in each individual game and extracts the most relevant features including runs scored, strike rates, recent performance in the last 'N' games and match conditions, to train various predictive models such as logistic regression, Random Forest, GBM, KNN and SVM. 
+
+The analysis are focused around a) finding the right feature combinations for each classifier and b) coming up with a ranking system for the performance of each classifier based on Accuracy, TPR and TNR. 
 
 # How to run the program 
 `Important`: run all programs from the root directory. If you attempt to run the files from their individual directory, you will run into importing errors. 
@@ -11,13 +13,15 @@ packages listed in requirements.txt, if your machine is already prepared to
 run typical data science projects you most likely have all the required packages 
 and are safe to move to the next step. 
 
+Once environment is setup, run: ```pip install -r requirements.txt```
+
 ## Configs 
 
 You can change the configs from the configs.py file or keep the default parameters as is to observe the general behavior of the program. 
 
 Each parameter is commented with explanation and supported values. All the data files (training and testing) are defined in the configs.py as well. 
 
-## Cleaned data with relevant features 
+## Cleaned up data with relevant features 
 
 Raw data from the csv are cleaned up and the relevant features are extracted in the data/batting_data.py and data/bowling_data.py.
 To run these: ```python3 data/batting_data.py``` 
