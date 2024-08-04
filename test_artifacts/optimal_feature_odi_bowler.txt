@@ -1,0 +1,20 @@
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+--------------------------------------------------------------------------------
+classifier: LOGISTIC REGRESSION
+Best TPR combination: ('country', 'recent_wickets_per_game', 'recent_strike_rate') with TPR = 58.34, with TNR = 64.59, with Accuracy = 60.37
+Best TNR combination: ('opposition', 'ground', 'country', 'recent_strike_rate') with TNR = 85.36, with TPR = 30.25, with Accuracy = 48.14
+Best Accuracy combination: ('career_wickets_per_game',) with Accuracy = 61.62, with TPR = 55.43, with TNR = 74.47
+
+
+--------------------------------------------------------------------------------
+classifier: KNN
+Best TPR combination: ('country',) with TPR = 100.0, with TNR = 0.0, with Accuracy = 67.53
+Best TNR combination: ('career_wickets_per_game', 'career_strike_rate') with TNR = 82.62, with TPR = 42.59, with Accuracy = 55.59
+Best Accuracy combination: ('career_wickets_per_game',) with Accuracy = 68.64, with TPR = 88.67, with TNR = 26.99
+
+
+--------------------------------------------------------------------------------
+classifier: RANDOM FOREST
+Best TPR combination: ('recent_wickets_per_game',) with TPR = 84.43, with TNR = 29.0, with Accuracy = 66.43
+Best TNR combination: ('country', 'career_strike_rate') with TNR = 89.25, with TPR = 27.23, with Accuracy = 47.37
+Best Accuracy combination: ('recent_wickets_per_game',) with Accuracy = 66.43, with TPR = 84.43, with TNR = 29.0

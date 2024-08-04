@@ -1,0 +1,22 @@
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BATTER
+--------------------------------------------------------------------------------
+classifier: LOGISTIC REGRESSION
+Best TPR combination: ('recent_avg', 'recent_avg_sr') with TPR = 67.8, with TNR = 54.75, with Accuracy = 64.17
+Best TNR combination: ('ground', 'country', 'avg_sr') with TNR = 82.37, with TPR = 35.62, with Accuracy = 48.62
+Best Accuracy combination: ('country', 'avg_runs', 'avg_sr', 'recent_avg_sr') with Accuracy = 66.4, with TPR = 67.09, with TNR = 64.6
+
+
+--------------------------------------------------------------------------------
+classifier: KNN
+Best TPR combination: ('country',) with TPR = 100.0, with TNR = 0.0, with Accuracy = 72.21
+Best TNR combination: ('avg_runs',) with TNR = 73.56, with TPR = 56.4, with Accuracy = 61.17
+Best Accuracy combination: ('country',) with Accuracy = 72.21, with TPR = 100.0, with TNR = 0.0
+
+
+--------------------------------------------------------------------------------
+classifier: RANDOM FOREST
+Best TPR combination: ('opposition',) with TPR = 58.23, with TNR = 43.63, with Accuracy = 54.17
+Best TNR combination: ('country', 'avg_runs', 'avg_sr') with TNR = 89.06, with TPR = 43.75, with Accuracy = 56.34
+Best Accuracy combination: ('ground', 'avg_runs') with Accuracy = 61.34, with TPR = 53.83, with TNR = 80.86
+
+
