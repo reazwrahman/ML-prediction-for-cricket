@@ -9,6 +9,10 @@ class Util:
     def __init__(self):
         pass
 
+    def make_predictions(self, model, test_data):
+        predictions = model.predict(test_data)
+        return predictions
+    
     def generate_confusion_matrix(self, predictions, test_df):
         if PREDICTION_FORMAT != "BINARY":
             print("ERROR! Can not generate confusion matrix for non-binary predictions")

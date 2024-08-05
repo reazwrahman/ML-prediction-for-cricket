@@ -1,10 +1,11 @@
 # Project Scope 
 
-This repository analyzes a number of machine learning models designed to predict whether a cricket player (batter and bowler) will exceed a specific performance threshold in upcoming matches. The project leverages uses open source historical data on players' performances in each individual game and extracts the most relevant features including runs scored, strike rates, recent performance in the last 'N' games and match conditions, to train various predictive models such as logistic regression, Random Forest, GBM, KNN and SVM. 
+This repository analyzes a number of machine learning models designed to predict whether a cricket player (batter and bowler) will exceed a specific performance threshold in upcoming matches. The project leverages open source historical data on players' performances in each individual game and extracts the most relevant features including runs scored, strike rates, recent performance in the last 'N' games and match conditions, to train various predictive models such as logistic regression, Random Forest, GBM, KNN and SVM. 
 
-The analysis are focused around a) finding the right feature combinations for each classifier and b) coming up with a ranking system for the performance of each classifier based on Accuracy, TPR and TNR. 
+The analysis is focused around a) finding the right feature combinations for each classifier and b) coming up with a ranking system to compare the performance of the classifiers based on Accuracy, TPR and TNR. 
 
 # How to run the program 
+
 `Important`: run all programs from the root directory. If you attempt to run the files from their individual directory, you will run into importing errors. 
 
 ## Installing packages  
@@ -40,7 +41,7 @@ All the analysis programs are under the analysis directory.
 
 1) features_kde_plotter: shows the separation of the two classes by each feature in a kde plot. This helps in visualizing how each feature separates the data on its own. 
 
-2) optimal_feature_finder: performs a brute search over the entire feature set space and finds the feature combination that produces the best TPR, best TNR and best accuracy for a particular classifier. 
+2) optimal_feature_finder: performs a brute force search over the entire feature set space and finds the feature combination that produces the best TPR, best TNR and best accuracy for a particular classifier. 
 
 3) performance_analyzer: performs a ranking among all the registered classifiers based on TPR, TNR and accuracy value. 
 

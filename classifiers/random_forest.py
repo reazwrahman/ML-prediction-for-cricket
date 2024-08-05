@@ -73,7 +73,8 @@ class MyRandomForestClassifier(BaseClassifier):
             criterion="entropy",
             random_state=42,
         )
-        model.fit(training_data, self.x_train["bucket"])
+        model.fit(training_data, self.x_train["bucket"]) 
+        self.feature_weights = model.feature_importances_
         return model
 
     def get_optimal_parameters(self):

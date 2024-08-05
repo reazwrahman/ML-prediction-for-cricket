@@ -51,7 +51,7 @@ if __name__ == "__main__":
     registrar["LOGISTIC REGRESSION"] = LogisticRegressionClassifier
     registrar["RANDOM FOREST"] = MyRandomForestClassifier 
     registrar["GBM"] = GBMClassifier 
-    registrar["SVM"] = SVMClassifier
+    #registrar["SVM"] = SVMClassifier
 
     dfs = []
     for each in registrar:

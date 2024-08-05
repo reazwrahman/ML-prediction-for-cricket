@@ -199,7 +199,15 @@ class BattingDataGenerator:
             return 4
 
     def __use_binary_classifier(self, runs):
-        if runs >= 0 and runs <= 30:
+        threshold = None
+        if GAME_FORMAT == "ODI": 
+            threshold = 30
+        elif GAME_FORMAT == "T20": 
+            threshold = 20 
+        else: 
+            raise Exception("BattingData::__use_binary_classifier unrecognized format")
+        
+        if runs < threshold:
             return 0
         else:
             return 1
