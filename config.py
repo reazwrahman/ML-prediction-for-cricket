@@ -2,7 +2,7 @@ GAME_FORMAT = "ODI"  ## ODI/T20
 
 PREDICTION_FORMAT = "BINARY"  ## BINARY/CUSTOM (CUSTOM is outdated, only use BINARY)
 
-PLAYER_ROLE = "BOWLER"  ## BATTER/BOWLER
+PLAYER_ROLE = "BATTER"  ## BATTER/BOWLER
 
 USE_SYNTHETIC_DATA = True  ## True/False, to address the imbalance of minority labels
 
@@ -14,7 +14,9 @@ if PLAYER_ROLE == "BOWLER":
         "career_wickets_per_game",
         "recent_wickets_per_game",
         "career_strike_rate",
-        "recent_strike_rate",
+        "recent_strike_rate", 
+        "ground_opposition", 
+        "country_opposition"
     ]
 
 elif PLAYER_ROLE == "BATTER":
@@ -25,7 +27,9 @@ elif PLAYER_ROLE == "BATTER":
         "avg_runs",
         "recent_avg",
         "avg_sr",
-        "recent_avg_sr",
+        "recent_avg_sr", 
+        "ground_opposition", 
+        "country_opposition"
     ]  ## features used in classifiers
 else:
     raise Exception("PLAYER_ROLE is not recognized")

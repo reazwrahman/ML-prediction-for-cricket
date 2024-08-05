@@ -259,6 +259,8 @@ class BowlingDataUtil:
             "recent_wickets_per_game",
             "career_strike_rate",
             "recent_strike_rate",
+            "ground_opposition", 
+            "country_opposition"
         ]
 
         self.encoding_map = dict()
@@ -279,6 +281,12 @@ class BowlingDataUtil:
         self.training_df = self.__encode_data(self.training_data_generator.df)
         self.testing_df = self.__encode_data(self.testing_data_generator.df)
 
+        self.training_df = self.compound_ground_opposition(self.training_data_generator.df)
+        self.testing_df = self.compound_ground_opposition(self.testing_data_generator.df) 
+
+        self.training_df = self.compound_country_opposition(self.training_data_generator.df)
+        self.testing_df = self.compound_country_opposition(self.testing_data_generator.df)
+
     def __encode_data(self, df):
         ## encode features
         le = LabelEncoder()
@@ -296,6 +304,20 @@ class BowlingDataUtil:
     def get_encode_decode_map(self):
         return {"encoding_map": self.encoding_map, "decoding_map": self.decoding_map}
 
+
+    def compound_ground_opposition(self, df):  
+        ''' feature interaction: to capture how a player 
+            performs against an opponent in a specific ground
+        '''
+        df["ground_opposition"] = df['ground'] * df['opposition'] 
+        return df 
+    
+    def compound_country_opposition(self, df):  
+        ''' feature interaction: to capture how a player 
+            from a certain country performs against an opponent
+        '''
+        df["country_opposition"] = df['country'] * df['opposition'] 
+        return df
 
 if __name__ == "__main__":
     bowling_util = BowlingDataUtil()

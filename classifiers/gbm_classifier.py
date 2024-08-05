@@ -35,7 +35,8 @@ class GBMClassifier(BaseClassifier):
     def __init__(self):
         self.name = "GRADIENT BOOSTING"
         super().__init__() 
-        self.optimal_parameters = OPTIMAL_PARAMETERS
+        self.optimal_parameters = OPTIMAL_PARAMETERS 
+        self.feature_weights = None
 
     def __find_optimal_parameters(self, training_data):
 
@@ -64,8 +65,19 @@ class GBMClassifier(BaseClassifier):
 
     def build_model(self, training_data):
         model = GradientBoostingClassifier(**self.optimal_parameters)
-        model.fit(training_data, self.x_train["bucket"])
-        return model
+        model.fit(training_data, self.x_train["bucket"]) 
+        self.feature_weights = model.feature_importances_
+        return model 
+
+    def get_feature_importance(self):
+        feature_importances_df = pd.DataFrame(
+            {"Feature": self.all_features, "Weight": self.feature_weights}
+        )
+
+        self.feature_importance = feature_importances_df.sort_values(
+            by="Weight", ascending=False
+        ).reset_index(drop=True)
+        return self.feature_importance
 
 
 if __name__ == "__main__":
@@ -79,4 +91,5 @@ if __name__ == "__main__":
     print(f"GBM all features used")
     print(accuracy)
     print("\n")
-    classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))
+    classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions)) 
+    print(classifier.get_feature_importance())
