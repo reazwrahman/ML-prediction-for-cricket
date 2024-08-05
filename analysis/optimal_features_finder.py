@@ -72,11 +72,11 @@ if __name__ == "__main__":
     ##all_feature_combinations = all_feature_combinations[0:2]  # for quick testing
 
     registrar = dict()
-    # registrar["KNN"] = KNNClassifier
-    # registrar["LOGISTIC REGRESSION"] = LogisticRegressionClassifier
-    # registrar["RANDOM FOREST"] = MyRandomForestClassifier 
-    # registrar["GBM"] = GBMClassifier 
-    registrar["SVM"] = SVMClassifier
+    registrar["KNN"] = KNNClassifier
+    registrar["LOGISTIC REGRESSION"] = LogisticRegressionClassifier
+    registrar["RANDOM FOREST"] = MyRandomForestClassifier 
+    registrar["GBM"] = GBMClassifier 
+    # registrar["SVM"] = SVMClassifier
 
     # Multiprocessing pool
     with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:

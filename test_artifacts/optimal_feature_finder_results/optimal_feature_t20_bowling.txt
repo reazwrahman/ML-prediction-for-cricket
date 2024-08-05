@@ -1,0 +1,27 @@
+GAME FORMAT: T20, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+--------------------------------------------------------------------------------
+classifier: LOGISTIC REGRESSION
+Best TPR combination: ('career_wickets_per_game', 'recent_wickets_per_game') with TPR = 58.9, with TNR = 69.86, with Accuracy = 62.03
+Best TNR combination: ('opposition', 'ground', 'recent_strike_rate') with TNR = 89.0, with TPR = 25.33, with Accuracy = 43.54
+Best Accuracy combination: ('ground', 'career_wickets_per_game', 'recent_wickets_per_game') with Accuracy = 62.06, with TPR = 58.85, with TNR = 70.08
+
+
+--------------------------------------------------------------------------------
+classifier: KNN
+Best TPR combination: ('country',) with TPR = 100.0, with TNR = 0.0, with Accuracy = 71.41
+Best TNR combination: ('career_wickets_per_game', 'career_strike_rate', 'recent_strike_rate') with TNR = 77.67, with TPR = 43.52, with Accuracy = 53.29
+Best Accuracy combination: ('recent_wickets_per_game',) with Accuracy = 71.56, with TPR = 98.9, with TNR = 3.3
+
+
+--------------------------------------------------------------------------------
+classifier: GBM
+Best TPR combination: ('career_wickets_per_game',) with TPR = 56.61, with TNR = 72.17, with Accuracy = 61.06
+Best TNR combination: ('country',) with TNR = 78.44, with TPR = 24.41, with Accuracy = 39.86
+Best Accuracy combination: ('career_wickets_per_game',) with Accuracy = 61.06, with TPR = 56.61, with TNR = 72.17
+
+
+--------------------------------------------------------------------------------
+classifier: RANDOM FOREST
+Best TPR combination: ('recent_wickets_per_game',) with TPR = 84.76, with TNR = 28.49, with Accuracy = 68.67
+Best TNR combination: ('country', 'career_strike_rate', 'recent_strike_rate') with TNR = 87.9, with TPR = 32.25, with Accuracy = 48.16
+Best Accuracy combination: ('recent_wickets_per_game',) with Accuracy = 68.67, with TPR = 84.76, with TNR = 28.49

@@ -1,0 +1,20 @@
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+
+
+     TP   FP    TN    FN    TPR    TNR  Accuracy           Classifier
+0  2481  816  1370  2065  54.58  62.67     57.20                  KNN
+0  2373  496  1690  2173  52.20  77.31     60.35  LOGISTIC REGRESSION
+0  1976  354  1832  2570  43.47  83.81     56.57        RANDOM FOREST
+0  2123  393  1793  2423  46.70  82.02     58.17    GRADIENT BOOSTING
+Overall Analysis Summary
+--------------------------------------------------------------------------------
+Best classifier based on Accuracy: LOGISTIC REGRESSION with Accuracy = 60.35%
+Classifier with highest TPR: KNN with TPR = 54.58%
+Classifier with highest TNR: RANDOM FOREST with TNR = 83.81%
+
+Ranking Summary:
+            Classifier  Accuracy Rank  TPR Rank  TNR Rank
+0                  KNN            3.0       1.0       4.0
+0  LOGISTIC REGRESSION            1.0       2.0       3.0
+0        RANDOM FOREST            4.0       4.0       1.0
+0    GRADIENT BOOSTING            2.0       3.0       2.0

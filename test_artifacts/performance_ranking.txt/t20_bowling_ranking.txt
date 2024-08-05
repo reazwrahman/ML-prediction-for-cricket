@@ -1,0 +1,20 @@
+GAME FORMAT: T20, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+
+
+     TP   FP   TN    FN    TPR    TNR  Accuracy           Classifier
+0  1307  410  499   963  57.58  54.90     56.81                  KNN
+0  1269  250  659  1001  55.90  72.50     60.65  LOGISTIC REGRESSION
+0  1138  211  698  1132  50.13  76.79     57.75        RANDOM FOREST
+0  1245  241  668  1025  54.85  73.49     60.18    GRADIENT BOOSTING
+Overall Analysis Summary
+--------------------------------------------------------------------------------
+Best classifier based on Accuracy: LOGISTIC REGRESSION with Accuracy = 60.65%
+Classifier with highest TPR: KNN with TPR = 57.58%
+Classifier with highest TNR: RANDOM FOREST with TNR = 76.79%
+
+Ranking Summary:
+            Classifier  Accuracy Rank  TPR Rank  TNR Rank
+0                  KNN            4.0       1.0       4.0
+0  LOGISTIC REGRESSION            1.0       2.0       3.0
+0        RANDOM FOREST            3.0       4.0       1.0
+0    GRADIENT BOOSTING            2.0       3.0       2.0

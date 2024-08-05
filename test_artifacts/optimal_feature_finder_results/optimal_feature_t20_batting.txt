@@ -1,0 +1,28 @@
+GAME FORMAT: T20, PREDICTION FORMAT: BINARY, PLAYER ROLE: BATTER
+--------------------------------------------------------------------------------
+classifier: LOGISTIC REGRESSION
+Best TPR combination: ('country', 'recent_avg') with TPR = 68.61, with TNR = 51.34, with Accuracy = 62.65
+Best TNR combination: ('opposition', 'ground', 'recent_avg_sr') with TNR = 73.78, with TPR = 43.21, with Accuracy = 53.75
+Best Accuracy combination: ('avg_runs', 'recent_avg') with Accuracy = 64.33, with TPR = 62.75, with TNR = 67.33
+
+
+--------------------------------------------------------------------------------
+classifier: KNN
+Best TPR combination: ('ground',) with TPR = 90.1, with TNR = 11.53, with Accuracy = 63.01
+Best TNR combination: ('avg_runs', 'recent_avg') with TNR = 75.5, with TPR = 50.36, with Accuracy = 59.03
+Best Accuracy combination: ('opposition', 'country', 'avg_runs', 'avg_sr', 'recent_avg_sr') with Accuracy = 64.14, with TPR = 68.5, with TNR = 55.87
+
+
+--------------------------------------------------------------------------------
+classifier: GBM
+Best TPR combination: ('opposition',) with TPR = 84.97, with TNR = 15.44, with Accuracy = 60.99
+Best TNR combination: ('recent_avg', 'avg_sr') with TNR = 81.61, with TPR = 43.82, with Accuracy = 56.85
+Best Accuracy combination: ('avg_runs', 'recent_avg') with Accuracy = 62.7, with TPR = 55.85, with TNR = 75.7
+
+
+--------------------------------------------------------------------------------
+classifier: RANDOM FOREST
+Best TPR combination: ('opposition',) with TPR = 62.75, with TNR = 37.68, with Accuracy = 54.11
+Best TNR combination: ('country', 'avg_runs', 'recent_avg', 'recent_avg_sr') with TNR = 90.25, with TPR = 38.11, with Accuracy = 56.09
+Best Accuracy combination: ('opposition', 'ground', 'country', 'avg_runs', 'recent_avg_sr') with Accuracy = 60.66, with TPR = 51.37, with TNR = 78.31
+

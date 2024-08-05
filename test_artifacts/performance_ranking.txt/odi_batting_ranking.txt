@@ -1,0 +1,20 @@
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BATTER
+
+
+     TP    FP    TN    FN    TPR    TNR  Accuracy           Classifier
+0  4598  1214  1664  2527  64.53  57.82     62.60                  KNN
+0  4708   970  1908  2417  66.08  66.30     66.14  LOGISTIC REGRESSION
+0  3598   512  2366  3527  50.50  82.21     59.62        RANDOM FOREST
+0  4136   701  2177  2989  58.05  75.64     63.11    GRADIENT BOOSTING
+Overall Analysis Summary
+--------------------------------------------------------------------------------
+Best classifier based on Accuracy: LOGISTIC REGRESSION with Accuracy = 66.14%
+Classifier with highest TPR: LOGISTIC REGRESSION with TPR = 66.08%
+Classifier with highest TNR: RANDOM FOREST with TNR = 82.21%
+
+Ranking Summary:
+            Classifier  Accuracy Rank  TPR Rank  TNR Rank
+0                  KNN            3.0       2.0       4.0
+0  LOGISTIC REGRESSION            1.0       1.0       3.0
+0        RANDOM FOREST            4.0       4.0       1.0
+0    GRADIENT BOOSTING            2.0       3.0       2.0
