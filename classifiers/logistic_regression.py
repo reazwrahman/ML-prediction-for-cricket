@@ -1,5 +1,5 @@
 import copy
-import pandas as pd 
+import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
@@ -29,13 +29,13 @@ from util import Util
 class LogisticRegressionClassifier(BaseClassifier):
     def __init__(self):
         self.name = "LOGISTIC REGRESSION"
-        super().__init__() 
-        self.feature_importance = None
+        super().__init__()
+        self.feature_weights = None
 
     def build_model(self, training_data):
         model = LogisticRegression(random_state=42, max_iter=10000)
-        model.fit(training_data, self.x_train["bucket"]) 
-        self.feature_importance = model.coef_[0] 
+        model.fit(training_data, self.x_train["bucket"])
+        self.feature_weights = model.coef_[0]
         return model
 
     def experiment_dropping_feature(self):
@@ -48,19 +48,18 @@ class LogisticRegressionClassifier(BaseClassifier):
             predictions = model.predict(self.x_test[selected_features])
             accuracy = classifier.compute_accuracy(predictions)
             print(accuracy)
-            print("\n") 
-    
-    def get_feature_importance(self):   
-        print('im here')
-        self.feature_weights = pd.DataFrame({
-            'Feature': self.all_features,
-            'Weights': self.feature_weights
-        })
+            print("\n")
+
+    def get_feature_importance(self):
+        self.feature_weights = pd.DataFrame(
+            {"Feature": self.all_features, "Weights": self.feature_weights}
+        )
 
         # Sort by absolute value of importance
-        self.feature_weights = self.feature_weights.reindex(self.feature_weights['Weights'].abs().sort_values(ascending=False).index)
+        self.feature_weights = self.feature_weights.reindex(
+            self.feature_weights["Weights"].abs().sort_values(ascending=False).index
+        )
         return self.feature_weights
-
 
 
 if __name__ == "__main__":
@@ -78,7 +77,9 @@ if __name__ == "__main__":
         classifier.print_confusion_matrix(
             classifier.generate_confusion_matrix(predictions)
         )
-        print(classifier.x_test["predictions"].unique()) 
-        print(classifier.get_feature_importance())
+        print(classifier.x_test["predictions"].unique())
+        imp = classifier.get_feature_importance()
+        print(imp)
+        print(list(imp["Feature"][0:5]))
     else:
         print("Logistic Regression can only be applied for binary predictions")

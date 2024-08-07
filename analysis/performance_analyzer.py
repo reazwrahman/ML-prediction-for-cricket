@@ -11,10 +11,13 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 
 from classifiers.knn_classifer import KNNClassifier
 from classifiers.logistic_regression import LogisticRegressionClassifier
-from classifiers.random_forest import MyRandomForestClassifier 
-from classifiers.gbm_classifier import GBMClassifier 
+from classifiers.random_forest import MyRandomForestClassifier
+from classifiers.gbm_classifier import GBMClassifier
 from classifiers.svm_classifier import SVMClassifier
 from config import PREDICTION_FORMAT, GAME_FORMAT, PLAYER_ROLE, FEATURES
+
+
+TOP_FEATURE_COUNT = None  ## SET TO NONE, if all features are to be used
 
 
 def analyze_summary(df):
@@ -45,24 +48,34 @@ def analyze_summary(df):
     print("\nRanking Summary:")
     print(df[["Classifier", "Accuracy Rank", "TPR Rank", "TNR Rank"]])
 
+
 if __name__ == "__main__":
+    top_feature_count: int = TOP_FEATURE_COUNT
+    if top_feature_count is None:
+        top_feature_count = len(FEATURES)
+
+    print(f"Top {TOP_FEATURE_COUNT} features used")
+    print("\n")
     registrar = dict()
     registrar["KNN"] = KNNClassifier
     registrar["LOGISTIC REGRESSION"] = LogisticRegressionClassifier
-    registrar["RANDOM FOREST"] = MyRandomForestClassifier 
-    registrar["GBM"] = GBMClassifier 
-    #registrar["SVM"] = SVMClassifier
+    registrar["RANDOM FOREST"] = MyRandomForestClassifier
+    registrar["GBM"] = GBMClassifier
 
     dfs = []
     for each in registrar:
         classifier = registrar[each]()
+        classifier.build_model(classifier.x_train[classifier.all_features])
+        top_features = list(classifier.get_feature_importance()["Feature"])[
+            0:top_feature_count
+        ]
+        classifier.update_features(top_features)
         predictions = classifier.make_predictions()
         accuracy = classifier.compute_accuracy(predictions)
         conf_matrix = classifier.generate_confusion_matrix(predictions)
         conf_matrix["Classifier"] = classifier.name
         conf_df = pd.DataFrame([conf_matrix])
         dfs.append(conf_df)
-
 
     print(
         f"GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}, PLAYER ROLE: {PLAYER_ROLE}"

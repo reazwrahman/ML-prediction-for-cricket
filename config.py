@@ -14,9 +14,9 @@ if PLAYER_ROLE == "BOWLER":
         "career_wickets_per_game",
         "recent_wickets_per_game",
         "career_strike_rate",
-        "recent_strike_rate", 
-        "ground_opposition", 
-        "country_opposition"
+        "recent_strike_rate",
+        "ground_opposition",
+        "country_opposition",
     ]
 
 elif PLAYER_ROLE == "BATTER":
@@ -27,9 +27,9 @@ elif PLAYER_ROLE == "BATTER":
         "avg_runs",
         "recent_avg",
         "avg_sr",
-        "recent_avg_sr", 
-        "ground_opposition", 
-        "country_opposition"
+        "recent_avg_sr",
+        "ground_opposition",
+        "country_opposition",
     ]  ## features used in classifiers
 else:
     raise Exception("PLAYER_ROLE is not recognized")
