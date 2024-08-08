@@ -200,13 +200,13 @@ class BattingDataGenerator:
 
     def __use_binary_classifier(self, runs):
         threshold = None
-        if GAME_FORMAT == "ODI": 
+        if GAME_FORMAT == "ODI":
             threshold = 30
-        elif GAME_FORMAT == "T20": 
-            threshold = 20 
-        else: 
+        elif GAME_FORMAT == "T20":
+            threshold = 20
+        else:
             raise Exception("BattingData::__use_binary_classifier unrecognized format")
-        
+
         if runs < threshold:
             return 0
         else:
@@ -234,6 +234,8 @@ class BattingDataUtil:
             "recent_avg",
             "avg_sr",
             "recent_avg_sr",
+            "ground_opposition",
+            "country_opposition",
         ]
 
         self.encoding_map = dict()
@@ -254,6 +256,20 @@ class BattingDataUtil:
         self.training_df = self.__encode_data(self.training_data_generator.df)
         self.testing_df = self.__encode_data(self.testing_data_generator.df)
 
+        self.training_df = self.compound_ground_opposition(
+            self.training_data_generator.df
+        )
+        self.testing_df = self.compound_ground_opposition(
+            self.testing_data_generator.df
+        )
+
+        self.training_df = self.compound_country_opposition(
+            self.training_data_generator.df
+        )
+        self.testing_df = self.compound_country_opposition(
+            self.testing_data_generator.df
+        )
+
     def __encode_data(self, df):
         ## encode features
         le = LabelEncoder()
@@ -270,6 +286,20 @@ class BattingDataUtil:
 
     def get_encode_decode_map(self):
         return {"encoding_map": self.encoding_map, "decoding_map": self.decoding_map}
+
+    def compound_ground_opposition(self, df):
+        """feature interaction: to capture how a player
+        performs against an opponent in a specific ground
+        """
+        df["ground_opposition"] = df["ground"] * df["opposition"]
+        return df
+
+    def compound_country_opposition(self, df):
+        """feature interaction: to capture how a player
+        from a certain country performs against an opponent
+        """
+        df["country_opposition"] = df["country"] * df["opposition"]
+        return df
 
 
 if __name__ == "__main__":

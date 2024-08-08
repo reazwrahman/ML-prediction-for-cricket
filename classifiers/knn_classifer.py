@@ -3,6 +3,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
+from sklearn.inspection import permutation_importance
 import copy
 import os
 import sys
@@ -32,25 +33,35 @@ class KNNClassifier(BaseClassifier):
     def __init__(self):
         self.name = "KNN"
         super().__init__()
-        self.optimal_k = OPTIMAL_K
+        if OPTIMAL_K:
+            self.optimal_k = OPTIMAL_K
+        else:
+            self.optimal_k = self.find_optimal_k()
 
-    def build_model(self, training_data, k):
+    def build_model(self, training_data, k=None):
+        if k is None:
+            k = self.optimal_k
         model = KNeighborsClassifier(n_neighbors=k)
         model.fit(training_data, self.x_train["bucket"])
+        self.feature_importance = permutation_importance(
+            model,
+            training_data,
+            self.x_train["bucket"],
+            n_repeats=10,
+            random_state=42,
+            n_jobs=-1,
+        )
         return model
 
     ## override base method
     def make_predictions(self, k=None):
         if not k:
-            k = self.find_optimal_k()
+            k = self.optimal_k
 
         if not self.model:
-            model = self.build_model(self.x_train[self.all_features], k)
-            self.model = model
-        else:
-            model = self.model
+            self.model = self.build_model(self.x_train[self.all_features], k)
 
-        predictions = model.predict(self.x_test[self.all_features])
+        predictions = self.model.predict(self.x_test[self.all_features])
         self.x_test["predictions"] = predictions
         return predictions
 
@@ -104,6 +115,19 @@ class KNNClassifier(BaseClassifier):
         plt.grid(True)
         plt.show()
 
+    def get_feature_importance(self):
+        feature_importances_df = pd.DataFrame(
+            {
+                "Feature": self.all_features,
+                "Weight": self.feature_importance.importances_mean,
+            }
+        )
+        self.feature_importance = feature_importances_df.sort_values(
+            by="Weight", ascending=False
+        ).reset_index(drop=True)
+
+        return self.feature_importance
+
 
 if __name__ == "__main__":
     print(
@@ -115,5 +139,11 @@ if __name__ == "__main__":
     print(f"KNN classifier all features used")
     print(accuracy)
     print("\n")
+
     classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))
     print(f"optimal k = {classifier.optimal_k}")
+    print("\n")
+
+    classifier.build_model(classifier.x_train[classifier.all_features])
+    imp = classifier.get_feature_importance()
+    print(imp)

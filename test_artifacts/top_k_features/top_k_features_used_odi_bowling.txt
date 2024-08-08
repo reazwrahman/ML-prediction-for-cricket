@@ -1,0 +1,61 @@
+Top 2 features used
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+
+
+     TP    FP    TN    FN    TPR    TNR  Accuracy           Classifier
+0  2811  1365   821  1735  61.83  37.56     53.95                  KNN
+0  2454   533  1653  2092  53.98  75.62     61.01  LOGISTIC REGRESSION
+0  2820   787  1399  1726  62.03  64.00     62.67        RANDOM FOREST
+0  2133   394  1792  2413  46.92  81.98     58.30    GRADIENT BOOSTING
+Average accuracy: 58.98
+-------------------------------------------------------------------------------- 
+
+Top 3 features used
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+
+
+     TP    FP    TN    FN    TPR    TNR  Accuracy           Classifier
+0  2592  1087  1099  1954  57.02  50.27     54.83                  KNN
+0  2450   529  1657  2096  53.89  75.80     61.01  LOGISTIC REGRESSION
+0  1829   318  1868  2717  40.23  85.45     54.92        RANDOM FOREST
+0  2179   418  1768  2367  47.93  80.88     58.63    GRADIENT BOOSTING
+Average accuracy: 57.35
+--------------------------------------------------------------------------------
+
+Top 5 features used
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+
+
+     TP   FP    TN    FN    TPR    TNR  Accuracy           Classifier
+0  2358  863  1323  2188  51.87  60.52     54.68                  KNN
+0  2382  500  1686  2164  52.40  77.13     60.43  LOGISTIC REGRESSION
+0  1654  276  1910  2892  36.38  87.37     52.94        RANDOM FOREST
+0  2179  418  1768  2367  47.93  80.88     58.63    GRADIENT BOOSTING
+Average accuracy: 56.67
+-------------------------------------------------------------------------------- 
+
+Top 7 features used
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+
+
+     TP   FP    TN    FN    TPR    TNR  Accuracy           Classifier
+0  2348  843  1343  2198  51.65  61.44     54.83                  KNN
+0  2437  528  1658  2109  53.61  75.85     60.83  LOGISTIC REGRESSION
+0  1894  347  1839  2652  41.66  84.13     55.45        RANDOM FOREST
+0  2179  418  1768  2367  47.93  80.88     58.63    GRADIENT BOOSTING
+Average accuracy: 57.44
+Overall Analysis Summary
+--------------------------------------------------------------------------------
+
+Top 9 features used (all)
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BOWLER
+
+
+     TP   FP    TN    FN    TPR    TNR  Accuracy           Classifier
+0  2349  843  1343  2197  51.67  61.44     54.84                  KNN
+0  2421  519  1667  2125  53.26  76.26     60.72  LOGISTIC REGRESSION
+0  1820  305  1881  2726  40.04  86.05     54.98        RANDOM FOREST
+0  2179  418  1768  2367  47.93  80.88     58.63    GRADIENT BOOSTING
+Average accuracy: 57.29
+Overall Analysis Summary
+--------------------------------------------------------------------------------

@@ -18,15 +18,15 @@ from config import (
     PLAYER_ROLE,
     USE_SYNTHETIC_DATA,
 )
-from util import Util 
+from util import Util
 
 
 class SVMClassifier(BaseClassifier):
-    def __init__(self): 
+    def __init__(self):
         self.name = "SVM"
-        super().__init__() 
+        super().__init__()
 
-    def build_model(self, training_data): 
+    def build_model(self, training_data):
         model = SVC(probability=True)
         model.fit(training_data, self.x_train["bucket"])
         return model
@@ -43,5 +43,3 @@ if __name__ == "__main__":
     print(accuracy)
     print("\n")
     classifier.print_confusion_matrix(classifier.generate_confusion_matrix(predictions))
-
-    

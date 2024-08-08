@@ -1,5 +1,6 @@
 import copy
 import pandas as pd
+import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix
@@ -29,10 +30,12 @@ class LogisticRegressionClassifier(BaseClassifier):
     def __init__(self):
         self.name = "LOGISTIC REGRESSION"
         super().__init__()
+        self.feature_weights = None
 
     def build_model(self, training_data):
         model = LogisticRegression(random_state=42, max_iter=10000)
         model.fit(training_data, self.x_train["bucket"])
+        self.feature_weights = model.coef_[0]
         return model
 
     def experiment_dropping_feature(self):
@@ -46,6 +49,17 @@ class LogisticRegressionClassifier(BaseClassifier):
             accuracy = classifier.compute_accuracy(predictions)
             print(accuracy)
             print("\n")
+
+    def get_feature_importance(self):
+        self.feature_weights = pd.DataFrame(
+            {"Feature": self.all_features, "Weights": self.feature_weights}
+        )
+
+        # Sort by absolute value of importance
+        self.feature_weights = self.feature_weights.reindex(
+            self.feature_weights["Weights"].abs().sort_values(ascending=False).index
+        )
+        return self.feature_weights
 
 
 if __name__ == "__main__":
@@ -64,5 +78,8 @@ if __name__ == "__main__":
             classifier.generate_confusion_matrix(predictions)
         )
         print(classifier.x_test["predictions"].unique())
+        imp = classifier.get_feature_importance()
+        print(imp)
+        print(list(imp["Feature"][0:5]))
     else:
         print("Logistic Regression can only be applied for binary predictions")

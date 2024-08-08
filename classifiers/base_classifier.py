@@ -50,6 +50,7 @@ class BaseClassifier:
 
         self.scale_training_data()
         self.model = None
+        self.feature_importance = None
 
     def scale_training_data(self):
         self.scaler = StandardScaler()
@@ -87,3 +88,6 @@ class BaseClassifier:
 
     def print_confusion_matrix(self, confusion_matrix: dict):
         self.general_util.print_confusion_matrix(confusion_matrix)
+
+    def get_feature_importance(self):
+        raise NotImplementedError
