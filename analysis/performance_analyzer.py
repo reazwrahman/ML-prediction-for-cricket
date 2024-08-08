@@ -54,8 +54,7 @@ if __name__ == "__main__":
     if top_feature_count is None:
         top_feature_count = len(FEATURES)
 
-    print(f"Top {TOP_FEATURE_COUNT} features used")
-    print("\n")
+    print(f"Top {top_feature_count} features used")
     registrar = dict()
     registrar["KNN"] = KNNClassifier
     registrar["LOGISTIC REGRESSION"] = LogisticRegressionClassifier
@@ -82,5 +81,7 @@ if __name__ == "__main__":
     )
     print("\n")
     summary_df = pd.concat(dfs, axis=0)
-    print(summary_df)
+    print(summary_df)  
+    avg_accuracy = round(summary_df['Accuracy'].mean(),2)
+    print(f'Average accuracy: {avg_accuracy}')
     analyze_summary(summary_df)

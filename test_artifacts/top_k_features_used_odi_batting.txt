@@ -1,0 +1,69 @@
+Top 2 features used
+
+
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BATTER
+
+
+     TP    FP    TN    FN    TPR    TNR  Accuracy           Classifier
+0  4303  1738  1140  2822  60.39  39.61     54.41                  KNN
+0  4720   997  1881  2405  66.25  65.36     65.99  LOGISTIC REGRESSION
+0  3492   426  2452  3633  49.01  85.20     59.42        RANDOM FOREST
+0  3956   609  2269  3169  55.52  78.84     62.23    GRADIENT BOOSTING
+
+Avg accruacy of the classifiers: 60.51
+--------------------------------------------------------------------------------
+Top 3 features used
+
+
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BATTER
+
+
+     TP    FP    TN    FN    TPR    TNR  Accuracy           Classifier
+0  4387  1034  1844  2738  61.57  64.07     62.29                  KNN
+0  4735  1003  1875  2390  66.46  65.15     66.08  LOGISTIC REGRESSION
+0  3354   397  2481  3771  47.07  86.21     58.33        RANDOM FOREST
+0  3956   609  2269  3169  55.52  78.84     62.23    GRADIENT BOOSTING
+
+Avg accruacy of the classifiers: 62.23
+
+--------------------------------------------------------------------------------
+Top 4 features used
+
+
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BATTER
+
+
+     TP    FP    TN    FN    TPR    TNR  Accuracy           Classifier
+0  4556  1150  1728  2569  63.94  60.04     62.82                  KNN
+0  4769  1023  1855  2356  66.93  64.45     66.22  LOGISTIC REGRESSION
+0  3143   319  2559  3982  44.11  88.92     57.00        RANDOM FOREST
+0  3956   609  2269  3169  55.52  78.84     62.23    GRADIENT BOOSTING
+
+Avg accruacy of the classifiers: 62.07
+-------------------------------------------------------------------------------- 
+
+Top 5 features used 
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BATTER
+
+
+     TP    FP    TN    FN    TPR    TNR  Accuracy           Classifier
+0  4311  1143  1735  2814  60.51  60.28     60.44                  KNN
+0  4792  1028  1850  2333  67.26  64.28     66.40  LOGISTIC REGRESSION
+0  3279   360  2518  3846  46.02  87.49     57.95        RANDOM FOREST
+0  3956   609  2269  3169  55.52  78.84     62.23    GRADIENT BOOSTING
+
+Avg accruacy of the classifiers: 61.65
+-------------------------------------------------------------------------------- 
+all features used
+
+GAME FORMAT: ODI, PREDICTION FORMAT: BINARY, PLAYER ROLE: BATTER
+
+
+     TP    FP    TN    FN    TPR    TNR  Accuracy           Classifier
+0  4231  1096  1782  2894  59.38  61.92     60.11                  KNN
+0  4769  1021  1857  2356  66.93  64.52     66.24  LOGISTIC REGRESSION
+0  3509   423  2455  3616  49.25  85.30     59.62        RANDOM FOREST
+0  3956   609  2269  3169  55.52  78.84     62.23    GRADIENT BOOSTING
+
+Avg accruacy of the classifiers: 62.05
+--------------------------------------------------------------------------------
