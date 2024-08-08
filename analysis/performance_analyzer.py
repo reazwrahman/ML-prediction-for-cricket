@@ -17,7 +17,7 @@ from classifiers.svm_classifier import SVMClassifier
 from config import PREDICTION_FORMAT, GAME_FORMAT, PLAYER_ROLE, FEATURES
 
 
-TOP_FEATURE_COUNT = None  ## SET TO NONE, if all features are to be used
+TOP_FEATURE_COUNT = 2  ## SET TO NONE, if all features are to be used
 
 
 def analyze_summary(df):
