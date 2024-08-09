@@ -31,7 +31,7 @@ else:
 
 x_train = data_util.training_df
 
-features_set = [FEATURES[0:4], FEATURES[4::]]
+features_set = [FEATURES[0:4], FEATURES[4:8], FEATURES[8::]] 
 
 for features in features_set:
     plt.figure(figsize=(16, 12))
