@@ -20,6 +20,7 @@ from config import (
 )
 from util import Util
 
+KERNEL = "gaussian" 
 
 class SVMClassifier(BaseClassifier):
     def __init__(self):
@@ -27,7 +28,8 @@ class SVMClassifier(BaseClassifier):
         super().__init__()
 
     def build_model(self, training_data):
-        model = SVC(probability=True)
+        #model = SVC(probability=True) 
+        model = SVC(kernel=KERNEL, random_state=42)
         model.fit(training_data, self.x_train["bucket"])
         return model
 
@@ -35,7 +37,8 @@ class SVMClassifier(BaseClassifier):
 if __name__ == "__main__":
     print(
         f"GAME FORMAT: {GAME_FORMAT}, PREDICTION FORMAT: {PREDICTION_FORMAT}, PLAYER ROLE: {PLAYER_ROLE}"
-    )
+    ) 
+    print(f'Kernel: {KERNEL}')
     classifier = SVMClassifier()
     predictions = classifier.make_predictions()
     accuracy = classifier.compute_accuracy(predictions)

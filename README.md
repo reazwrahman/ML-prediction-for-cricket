@@ -37,7 +37,8 @@ To run the logistic regression for example:
 
 ## Running analysis
 
-All the analysis programs are under the analysis directory. 
+All the analysis programs are under the analysis directory. Example: 
+```python3 analysis/performance_analyzer.py```
 
 1) features_kde_plotter: shows the separation of the two classes by each feature in a kde plot. This helps in visualizing how each feature separates the data on its own. 
 
@@ -47,7 +48,7 @@ All the analysis programs are under the analysis directory.
 
 ## Viewing Test Artifacts 
 
-Results from the analysis program above, general observations and analysis performed 
-to get the optimal parameters for some of the classifiers are recorded under the
-test_artifacts directory. 
+Results from the analysis program above, general observations and analysis performed to get the optimal parameters for some of the classifiers are recorded under the test_artifacts directory.  
+
+There is also a Comprehensive Analysis.pdf at the top level discussing all the findings. 
 
