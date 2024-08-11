@@ -54,7 +54,8 @@ class BaseClassifier:
 
     def scale_training_data(self):
         self.scaler = StandardScaler()
-        self.scaler.fit_transform(self.x_train[self.all_features])
+        self.scaler.fit_transform(self.x_train[self.all_features]) 
+        self.scaler.fit_transform(self.x_test[self.all_features])
 
     def update_features(self, features):
         self.all_features = features
