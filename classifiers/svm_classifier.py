@@ -20,7 +20,7 @@ from config import (
 )
 from util import Util
 
-KERNEL = "gaussian" 
+KERNEL = "linear" ## linear/rbf 
 
 class SVMClassifier(BaseClassifier):
     def __init__(self):

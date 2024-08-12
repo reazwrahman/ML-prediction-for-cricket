@@ -4,6 +4,8 @@ This repository analyzes a number of machine learning models designed to predict
 
 The analysis is focused around a) finding the right feature combinations for each classifier and b) coming up with a ranking system to compare the performance of the classifiers based on Accuracy, TPR and TNR. 
 
+Youtube Presentation Link: https://www.youtube.com/watch?v=IfC2IZdt6nU
+
 # How to run the program 
 
 `Important`: run all programs from the root directory. If you attempt to run the files from their individual directory, you will run into importing errors. 
