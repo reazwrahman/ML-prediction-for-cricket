@@ -1,6 +1,6 @@
 # Project Scope 
 
-This repository analyzes a number of machine learning models designed to predict whether a cricket player (batter and bowler) will exceed a specific performance threshold in upcoming matches. The project leverages open source historical data on players' performances in each individual game and extracts the most relevant features including runs scored, strike rates, recent performance in the last 'N' games and match conditions, to train various predictive models such as logistic regression, Random Forest, GBM, KNN and SVM. 
+This repository analyzes a number of machine learning models designed to predict whether a cricket player (batter and bowler) will exceed a specific performance threshold in upcoming matches. The project leverages open source historical data on players' performances in each individual game and extracts the most relevant features including runs scored, strike rates, recent performance in the last 'N' games and match conditions, to train various classification models such as logistic regression, Random Forest, GBM, KNN and SVM. 
 
 The analysis is focused around a) finding the right feature combinations for each classifier and b) coming up with a ranking system to compare the performance of the classifiers based on Accuracy, TPR and TNR. 
 
