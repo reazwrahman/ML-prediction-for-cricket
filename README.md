@@ -4,6 +4,8 @@ This repository analyzes a number of machine learning models designed to predict
 
 The analysis is focused around a) finding the right feature combinations for each classifier and b) coming up with a ranking system to compare the performance of the classifiers based on Accuracy, TPR and TNR. 
 
+Comprehensive Analysis: https://github.com/reazwrahman/ML-prediction-for-cricket/blob/main/Comprehensive%20Analysis.pdf 
+
 Youtube Presentation Link: https://www.youtube.com/watch?v=IfC2IZdt6nU 
 
 source data: https://data.world/cclayford/cricinfo-statsguru-data
